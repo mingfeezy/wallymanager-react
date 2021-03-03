@@ -7,7 +7,7 @@ import Header from './headerComponent';
 
 const isNumber = val => !isNaN(+val);
 
- class BillsForm extends Component {
+ class Bills extends Component {
      constructor(props) {
          super(props) 
          this.state = {
@@ -158,4 +158,4 @@ const isNumber = val => !isNaN(+val);
 
 }
 
-export default BillsForm;
+export default Bills;
