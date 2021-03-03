@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Header from './headerComponent';
 
-class Home extends Component {
+
+
+class Incomeform extends Component {
     render() {
         return (
             <div>
@@ -11,4 +12,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default Incomeform;

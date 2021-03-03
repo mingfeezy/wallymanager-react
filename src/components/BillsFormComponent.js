@@ -33,7 +33,7 @@ const isNumber = val => !isNaN(+val);
     render() {
         return (
             <div>
-                <Header />
+
                 <div className="container">
                     <LocalForm name="billsform" onSubmit={(values) => this.handelSubmit(values)}>
                         <Row className="form-group">
