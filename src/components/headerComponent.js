@@ -29,13 +29,18 @@ class Header extends Component {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/billsForm">
+                                <NavLink className="nav-link" to="/bills">
                                     <i className="fa fa-list fa-lg" /> BillsForm
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/incomeForm">
-                                    <i className="fa fa-list fa-lg" /> incomeForm
+                                <NavLink className="nav-link" to="/income">
+                                    <i className="fa fa-list fa-lg" /> income
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/profile">
+                                    <i className="fa fa-list fa-lg" /> Profile
                                 </NavLink>
                             </NavItem>
                  

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 
-class Incomeform extends Component {
+class Income extends Component {
     render() {
         return (
             <div>
@@ -12,4 +12,4 @@ class Incomeform extends Component {
     }
 }
 
-export default Incomeform;
+export default Income;
