@@ -1,6 +1,6 @@
-import * as ActionTypes from '../ActionTypes';
+import * as ActionTypes from '../actions/ActionTypes';
 
-export const Profile = (state = {
+const ProfileReducer = (state = {
     // isLoading: true,
     // errMess: null,
     profileData: []
@@ -8,5 +8,9 @@ export const Profile = (state = {
     switch (action.type) {
         case ActionTypes.ADD_PROFILE:
             return {...state, profileData: action.payload}
+        default:
+            return state;
     }
 }
+
+export { ProfileReducer as default }
