@@ -15,6 +15,7 @@ const isNumber = val => !isNaN(+val);
              rentBillInput: false,
              wirelessBillInput: false,
              netflixBillInput: false,
+             gasElecWatBillInput: false,
        
          }
          this.revealInput = this.revealInput.bind(this);
@@ -37,9 +38,9 @@ const isNumber = val => !isNaN(+val);
                 <div className="container">
                     <LocalForm name="billsform" onSubmit={(values) => this.handelSubmit(values)}>
                         <Row className="form-group">
-                            <Col md={3}>
-                                <Label htmlFor="carBillInput" onClick={this.revealInput}>
-                                    Car note
+                            <Col md={3} className="billBox">
+                                <Label htmlFor="carBillInput" onClick={this.revealInput} className="billsLabel">
+                                    Car 
                                 </Label>
                                 {this.state.carBillInput ? <div><Control.text 
                                     name="carBillInput"
@@ -62,7 +63,7 @@ const isNumber = val => !isNaN(+val);
                                     </div>: <div />}                      
                             </Col>
                             <Col md={3}>
-                                <Label htmlFor="rentBillInput" onClick={this.revealInput}>
+                                <Label htmlFor="rentBillInput" onClick={this.revealInput} className="billsLabel">
                                     <img />
                                     Rent
                                 </Label>
@@ -88,10 +89,9 @@ const isNumber = val => !isNaN(+val);
                                     </div>: <div />}     
                             </Col>
                             <Col md={3}>
-                                <Label htmlFor="wirelessBillInput" onClick={this.revealInput}>
-                                
-                                <img />
-                                Wireless
+                                <Label htmlFor="wirelessBillInput" onClick={this.revealInput} className="billsLabel">
+                           
+                                    Phone
                                 </Label>
                                 {this.state.wirelessBillInput ? <div><Control.text 
                                     name="wirelessBillInput"
@@ -114,15 +114,16 @@ const isNumber = val => !isNaN(+val);
                                     />
                                     </div>: <div />}     
                             </Col>
+                           
                             <Col md={3}>
-                                <Label htmlFor="netflixBillInput" onClick={this.revealInput}>
+                                <Label htmlFor="gasElecWatBillInput" onClick={this.revealInput} className="billsLabel">
                                 
                                 <img />
-                                Netflix
+                                Misc
                                 </Label>
-                                {this.state.netflixBillInput ? <div><Control.text 
-                                    name="netflixBillInput"
-                                    model=".netflixBillInput"
+                                {this.state.gasElecWatBillInput ? <div><Control.text 
+                                    name="gasElecWatBillInput"
+                                    model=".gasElecWatBillInput"
                                     className="form-control"
                                     placeholder="0.00$"  
                                     validators={{
@@ -131,7 +132,7 @@ const isNumber = val => !isNaN(+val);
                                     />
                                     <Errors
                                     className="text-danger"
-                                    model=".netflixBillInput"
+                                    model=".gasElecWatBillInput"
                                     show="touched"
                                     component="div"
                                     messages={{

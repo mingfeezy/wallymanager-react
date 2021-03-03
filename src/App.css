@@ -5,3 +5,19 @@
   -o-background-size: cover;
   background-size: cover;
 } */
+.billsLabel {
+  background: url(https://i.postimg.cc/Zqzry4MM/pexels-adrien-olichon-2387793.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 100px;
+  max-width: 250px;
+  max-height: 250px;
+  height: 250px;
+  width: 250px;
+  color: white;
+}
+.billsLabel:hover {
+  cursor: pointer;
+}
