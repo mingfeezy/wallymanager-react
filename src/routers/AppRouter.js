@@ -6,7 +6,8 @@ import Profile from '../components/ProfileComponent';
 import Header from '../components/headerComponent'
 import Income from '../components/IncomeComponent';
 import Savings from '../components/SavingsComponent';
-import Dashboard from '../components/DashboardComponent'
+import Dashboard from '../components/DashboardComponent';
+import Manager from '../components/ManagerComponent'
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -14,6 +15,7 @@ const AppRouter = () => (
         <Switch>
             <Route path='/home' component={Home}/>
             <Route path='/dashboard' component={Dashboard}/>
+            <Route path='/manager' component={Manager}/>
             <Route path='/bills' component={Bills}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/income' component={Income}/>

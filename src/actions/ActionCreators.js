@@ -38,27 +38,38 @@ export const addBills = ({
     car= 0,
     rent= 0,
     phone= 0,
-    misc =0
+    misc =0,
+    dayCar = null,
+    monthCar =null,
+    dayRent = null,
+    monthRent = null
 } = {}) => ({
     type:ActionTypes.ADD_BILLS,
     payload: {
         car,
         rent,
         phone,
-        misc
+        misc,
+        dayCar,
+        monthCar,
+        dayRent,
+        monthRent
+    
     }
 })
 export const addIncome = ({
     income= 0,
-    cycle= 0,
+    cycle= 7,
     payDay= 0,
+    payMonth= 0
     
 } = {}) => ({
     type:ActionTypes.ADD_INCOME,
     payload: {
         income,
         cycle,
-        payDay,      
+        payDay,  
+        payMonth    
     }
 })
 

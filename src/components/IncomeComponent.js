@@ -25,7 +25,7 @@ class Income extends Component {
   const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.startDate);
   const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.startDate);
         const date = `${day}-${month}`
-        const data = {...values, payDay: date}
+        const data = {...values, payDay: day, payMonth: month}
         this.props.addIncome(data)
         this.props.history.push("/home");
 
@@ -82,7 +82,7 @@ class Income extends Component {
                                 model=".cycle"
                                 className="form-control">
                                 <option value="7">weekly</option>
-                                <option value="15" defaultValue>Bi weekly</option>
+                                <option value="15">Bi weekly</option>
                                 <option value="30">Monthly</option>
 
                             </Control.select>                          

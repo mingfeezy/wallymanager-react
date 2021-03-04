@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { addBills } from '../actions/ActionCreators'
 import { NavLink, Link } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
 
 
 
@@ -21,9 +22,13 @@ const isNumber = val => !isNaN(+val);
              phone: false,
             //  netflixBillInput: false,
              misc: false,
+             carBillDate: null,
+             rentBillDate: null
        
          }
          this.revealInput = this.revealInput.bind(this);
+         this.handleChangeCarBillDate = this.handleChangeCarBillDate.bind(this);
+         this.handleChangeRentBillDate = this.handleChangeRentBillDate.bind(this);
      }
     
     revealInput(e) {
@@ -34,10 +39,27 @@ const isNumber = val => !isNaN(+val);
     
     }
     handelSubmit(values) {
-        console.log(values)
-        this.props.addBills(values);
-        this.props.history.push("/home");
+        const dayCar = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.carBillDate);
+        const monthCar = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.carBillDate);
+        const dayRent = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.rentBillDate);
+        const monthRent = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.rentBillDate);
+        const data = {...values, dayCar: dayCar,monthCar: monthCar,dayRent: dayRent,monthRent: monthRent}
+        console.log(data)
+        this.props.addBills(data);
+        // this.props.history.push("/home");
     }
+    handleChangeCarBillDate(date) {
+        this.setState({
+            carBillDate: date
+        })
+     
+      }
+    handleChangeRentBillDate(date) {
+        this.setState({
+            rentBillDate: date
+        })
+     
+      }
     disableBtn = (e) => {
         e.target.disabled = true
     }
@@ -68,7 +90,17 @@ const isNumber = val => !isNaN(+val);
                                             isNumber: 'Must be a number'      
                                         }}
                                     />
-                                    </div>: <div />}                      
+                                    </div>: <div />}  
+                                    <DatePicker
+                                    model=".carBillDate"
+                                    name="carBillDate"
+                                    selected={ this.state.carBillDate }
+                                    onChange={ this.handleChangeCarBillDate }
+                                    name="carBillDate"
+                                    dateFormat="MM-dd-yyyy"
+                                    calendarWeeks={true}
+                                    inputPlaceholder="Select a date"
+                                />                    
                             </Col>
                             <Col md={3}>
                                 <Label htmlFor="rent" onClick={this.revealInput} className="billsLabel" id="rentLabel" />
@@ -91,7 +123,17 @@ const isNumber = val => !isNaN(+val);
                                     
                                     }}
                                     />
-                                    </div>: <div />}     
+                                    </div>: <div />}
+                                    <DatePicker
+                                    model=".rentBillDate"
+                                    name="rentBillDate"
+                                    selected={ this.state.rentBillDate }
+                                    onChange={ this.handleChangeRentBillDate }
+                                    name="rentBillDate"
+                                    dateFormat="MM-dd"
+                                    calendarWeeks={true}
+                                    inputPlaceholder="Select a date"
+                                />                 
                             </Col>
                             <Col md={3}>
                                 <Label htmlFor="phone" onClick={this.revealInput} className="billsLabel" id="phoneLabel"/>

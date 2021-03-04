@@ -53,6 +53,11 @@ class Header extends Component {
                                     <i className="fa fa-list fa-lg" /> Dashboard //
                                 </NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/manager">
+                                    <i className="fa fa-list fa-lg" /> Manager //
+                                </NavLink>
+                            </NavItem>
                  
                         </Nav>
 
