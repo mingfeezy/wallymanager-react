@@ -40,13 +40,17 @@ const mapStateTothisProps = state => ({ bills: state.bills, savings: state.savin
          }
          this.getNextPayDate = this.getNextPayDate.bind(this)
      }
-      getNextPayDate(cycle, day, month) {
+    getNextPayDate(cycle, day, month) {
         if (+day + +cycle >= 30) {
             return `${+month.substring(1) + 1}-${+day + +cycle - 30}`
         } else if (+day + +cycle  < 30) {
             return `${+month.substring(1)}-${+day + +cycle}`
         }  
     }
+    // getNextCarBill(month, day, cycle = 30) {
+    //     l
+    //     return 
+    // }
     componentDidMount() {  
             }
 
