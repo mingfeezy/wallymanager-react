@@ -3,7 +3,7 @@ import * as ActionTypes from '../actions/ActionTypes';
 const IncomeReducer = (state = [], action) => {
     switch(action.type) {
         case ActionTypes.ADD_INCOME:
-            return {...state, income: action.payload}
+            return [...state, action.payload]
         default:
             return state;
     }

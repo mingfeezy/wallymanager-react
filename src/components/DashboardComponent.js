@@ -1,35 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
-import { Table } from 'reactstrap';
+import React from 'react';
+import IncomeList from './IncomeList';
+import SavingsList from './SavingsList';
 
-
-const mapStateTothisProps = state => ({ bills: state.bills, savings: state.savings, income: state.income, profile: state.profile })
-
-
-
-
- class Dashboard extends Component {
-     constructor(props) {
-         super(props) 
-         this.state = {
-
-         }
-        
-     }
-
-    componentDidMount() {  
-            }
-
-            
-    render() {
-        return (
-            <div>
-                <h1>DASHBOARD</h1>
-               
-            </div>
-        )
-    }
+const Dashboard = (props) => {
+    
+    return (
+        <>
+        <IncomeList/>
+        <SavingsList/>
+        </>
+    )
+    
 }
 
-export default withRouter(connect(mapStateTothisProps)(Dashboard));
+export default Dashboard;

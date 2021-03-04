@@ -14,9 +14,8 @@ const minLength = len => val => val && (val.length >= len);
 class Savings extends Component {
 
     handleSubmit = (values) => {
-        alert('here');
         this.props.addSavings(values);
-        this.props.history.push("/home");
+        this.props.history.push("/dashboard");
     }
 
 
