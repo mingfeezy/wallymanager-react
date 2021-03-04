@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Col, Label,Button } from 'reactstrap';
 import DatePicker from 'react-datepicker';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addIncome  } from '../actions/ActionCreators'
+
 const isNumber = val => !isNaN(+val);
 class Income extends Component {
     constructor(props) {
@@ -15,13 +19,18 @@ class Income extends Component {
     }
 
     handleSubmit(values) {
-        console.log(values)
-        console.log(this.state.startDate)
+
+  const date = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.startDate);
+
+        const data = {...values, payDay: date}
+        this.props.addIncome(data)
+
     }
     handleChange(date) {
         this.setState({
           startDate: date
         })
+     
       }
     
     render() {
@@ -30,13 +39,13 @@ class Income extends Component {
                     <LocalForm name="incomeForm" onSubmit={(values) => this.handleSubmit(values)}>
                     <Row className="form-group">
                         <Col md={3}>
-                            <Label htmlFor="payInput" onClick={this.revealInput}>
+                            <Label htmlFor="income" onClick={this.revealInput}>
                                 Net income 
                             </Label>
                             <Control.text
-                                id="payInput" 
-                                name="payInput"
-                                model=".payInput"
+                                id="income" 
+                                name="income"
+                                model=".income"
                                 className="form-control"
                                 placeholder="0.00$" 
                                 validators={{
@@ -45,7 +54,7 @@ class Income extends Component {
                                 />
                                 <Errors
                                     className="text-danger"
-                                    model=".payInput"
+                                    model=".income"
                                     show="touched"
                                     component="div"
                                     messages={{
@@ -55,30 +64,30 @@ class Income extends Component {
                                                     
                         </Col>
                         <Col md={3}>
-                            <Label htmlFor="payCycleInput" onClick={this.revealInput}>
+                            <Label htmlFor="cycle" onClick={this.revealInput}>
 
                                 pay cycle
                             </Label>
                             <Control.select 
-                                id="payCycleInput"
-                                name="payCycleInput"
-                                model=".payCycleInput"
+                                id="cycle"
+                                name="cycle"
+                                model=".cycle"
                                 className="form-control">
-                                <option value="weekly">weekly</option>
-                                <option value="biWeekly" selected>Bi weekly</option>
-                                <option value="monthly">Monthly</option>
+                                <option value="7">weekly</option>
+                                <option value="15" selected>Bi weekly</option>
+                                <option value="30">Monthly</option>
 
                             </Control.select>                          
                         </Col>
                         <Col>
-                        <Label htmlFor="nextPayDate" onClick={this.revealInput}>
+                        <Label htmlFor="payday" onClick={this.revealInput}>
 
                         Next pay date
                         </Label>
                         
                             <DatePicker
-                                    model=".nextPayDate"
-                                    name="nextPayDate"
+                                    model=".payday"
+                                    name="payday"
                                     selected={ this.state.startDate }
                                     onChange={ this.handleChange }
                                     name="startDate"
@@ -102,5 +111,9 @@ class Income extends Component {
         )
     }
 }
+const mapStateToProps = state =>({ income: state.income })
 
-export default Income;
+const mapDispatchToProps = {
+    addIncome
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Income));

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+
 import { Row, Col, Label,Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+import { addBills } from '../actions/ActionCreators'
 
 
 
@@ -11,11 +15,11 @@ const isNumber = val => !isNaN(+val);
      constructor(props) {
          super(props) 
          this.state = {
-             carBillInput: false,
-             rentBillInput: false,
-             wirelessBillInput: false,
-             netflixBillInput: false,
-             gasElecWatBillInput: false,
+             car: false,
+             rent: false,
+             phone: false,
+            //  netflixBillInput: false,
+             misc: false,
        
          }
          this.revealInput = this.revealInput.bind(this);
@@ -30,6 +34,7 @@ const isNumber = val => !isNaN(+val);
     }
     handelSubmit(values) {
         console.log(values)
+        this.props.addBills(values)
     }
     render() {
         return (
@@ -39,12 +44,12 @@ const isNumber = val => !isNaN(+val);
                     <LocalForm name="billsform" onSubmit={(values) => this.handelSubmit(values)}>
                         <Row className="form-group">
                             <Col md={3} className="billBox">
-                                <Label htmlFor="carBillInput" onClick={this.revealInput} className="billsLabel">
+                                <Label htmlFor="car" onClick={this.revealInput} className="billsLabel">
                                     Car 
                                 </Label>
-                                {this.state.carBillInput ? <div><Control.text 
-                                    name="carBillInput"
-                                    model=".carBillInput"
+                                {this.state.car ? <div><Control.text 
+                                    name="car"
+                                    model=".car"
                                     className="form-control"
                                     placeholder="0.00$" 
                                     validators={{
@@ -53,7 +58,7 @@ const isNumber = val => !isNaN(+val);
                                     />
                                     <Errors
                                         className="text-danger"
-                                        model=".carBillInput"
+                                        model=".car"
                                         show="touched"
                                         component="div"
                                         messages={{
@@ -63,13 +68,13 @@ const isNumber = val => !isNaN(+val);
                                     </div>: <div />}                      
                             </Col>
                             <Col md={3}>
-                                <Label htmlFor="rentBillInput" onClick={this.revealInput} className="billsLabel">
+                                <Label htmlFor="rent" onClick={this.revealInput} className="billsLabel">
                                     <img />
                                     Rent
                                 </Label>
-                                {this.state.rentBillInput ? <div><Control.text 
-                                    name="rentBillInput"
-                                    model=".rentBillInput"
+                                {this.state.rent ? <div><Control.text 
+                                    name="rent"
+                                    model=".rent"
                                     className="form-control"
                                     placeholder="0.00$" 
                                         validators={{
@@ -78,7 +83,7 @@ const isNumber = val => !isNaN(+val);
                                     />
                                     <Errors
                                     className="text-danger"
-                                    model=".rentBillInput"
+                                    model=".rent"
                                     show="touched"
                                     component="div"
                                     messages={{
@@ -89,13 +94,13 @@ const isNumber = val => !isNaN(+val);
                                     </div>: <div />}     
                             </Col>
                             <Col md={3}>
-                                <Label htmlFor="wirelessBillInput" onClick={this.revealInput} className="billsLabel">
+                                <Label htmlFor="phone" onClick={this.revealInput} className="billsLabel">
                            
                                     Phone
                                 </Label>
-                                {this.state.wirelessBillInput ? <div><Control.text 
-                                    name="wirelessBillInput"
-                                    model=".wirelessBillInput"
+                                {this.state.phone ? <div><Control.text 
+                                    name="phone"
+                                    model=".phone"
                                     className="form-control"
                                     placeholder="0.00$"    
                                     validators={{
@@ -104,7 +109,7 @@ const isNumber = val => !isNaN(+val);
                                     />
                                     <Errors
                                     className="text-danger"
-                                    model=".wirelessBillInput"
+                                    model=".phone"
                                     show="touched"
                                     component="div"
                                     messages={{
@@ -116,14 +121,14 @@ const isNumber = val => !isNaN(+val);
                             </Col>
                            
                             <Col md={3}>
-                                <Label htmlFor="gasElecWatBillInput" onClick={this.revealInput} className="billsLabel">
+                                <Label htmlFor="misc" onClick={this.revealInput} className="billsLabel">
                                 
                                 <img />
                                 Misc
                                 </Label>
-                                {this.state.gasElecWatBillInput ? <div><Control.text 
-                                    name="gasElecWatBillInput"
-                                    model=".gasElecWatBillInput"
+                                {this.state.misc ? <div><Control.text 
+                                    name="misc"
+                                    model=".misc"
                                     className="form-control"
                                     placeholder="0.00$"  
                                     validators={{
@@ -132,7 +137,7 @@ const isNumber = val => !isNaN(+val);
                                     />
                                     <Errors
                                     className="text-danger"
-                                    model=".gasElecWatBillInput"
+                                    model=".misc"
                                     show="touched"
                                     component="div"
                                     messages={{
@@ -159,4 +164,8 @@ const isNumber = val => !isNaN(+val);
 
 }
 
-export default Bills;
+const mapStateToProps = state => ({bills: state.bills})
+const mapDispatchToProps = {
+    addBills
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Bills));

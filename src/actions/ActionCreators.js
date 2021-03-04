@@ -34,3 +34,31 @@ export const addSavings = ({
     }
 });
 
+export const addBills = ({
+    car= 0,
+    rent= 0,
+    phone= 0,
+    misc =0
+} = {}) => ({
+    type:ActionTypes.ADD_BILLS,
+    payload: {
+        car,
+        rent,
+        phone,
+        misc
+    }
+})
+export const addIncome = ({
+    income= 0,
+    cycle= 0,
+    payDay= 0,
+    
+} = {}) => ({
+    type:ActionTypes.ADD_INCOME,
+    payload: {
+        income,
+        cycle,
+        payDay,      
+    }
+})
+
