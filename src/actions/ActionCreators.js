@@ -27,6 +27,7 @@ export const addSavings = ({
 } = {}) => ({
     type: ActionTypes.ADD_SAVINGS,
     payload: {
+        id:uuidv4(),
         name, 
         amount,
         frequency,
@@ -46,6 +47,7 @@ export const addBills = ({
 } = {}) => ({
     type:ActionTypes.ADD_BILLS,
     payload: {
+        id:uuidv4(),
         car,
         rent,
         phone,
@@ -66,6 +68,7 @@ export const addIncome = ({
 } = {}) => ({
     type:ActionTypes.ADD_INCOME,
     payload: {
+        id:uuidv4(),
         income,
         cycle,
         payDay,  
