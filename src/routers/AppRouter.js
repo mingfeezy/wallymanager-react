@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../components/HomeComponent';
 import Bills from '../components/BillsComponent';
 import Profile from '../components/ProfileComponent';
-import Header from '../components/headerComponent';
-import Income from '../components/IncomeComponent'
+import Header from '../components/HeaderComponent';
+import Income from '../components/IncomeComponent';
+import Savings from '../components/SavingsComponent'
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -14,6 +15,7 @@ const AppRouter = () => (
             <Route path='/bills' component={Bills}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/income' component={Income}/>
+            <Route path='/savings' component={Savings}/>
             <Redirect to='/home' />
         </Switch>
     </BrowserRouter>

@@ -9,13 +9,28 @@ export const addProfile = ({
     password = '',
 } = {}) => ({
     type: ActionTypes.ADD_PROFILE,
-    user: {
+    payload: {
         id:uuidv4(),
         firstName,
         lastName,
         email,
         userName,
         password
+    }
+});
+
+export const addSavings = ({
+    name= '',
+    amount = 0,
+    frequency = 0,
+    enable = true
+} = {}) => ({
+    type: ActionTypes.ADD_SAVINGS,
+    payload: {
+        name, 
+        amount,
+        frequency,
+        enable
     }
 });
 

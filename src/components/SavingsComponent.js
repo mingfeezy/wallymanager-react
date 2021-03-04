@@ -3,19 +3,19 @@ import { Breadcrumb, BreadcrumbItem,
     Button, Row, Label, Col, Table } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { NavLink, Link } from 'react-router-dom';
-import { addProfile } from '../actions/ActionCreators'
+import { addSavings } from '../actions/ActionCreators'
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
 const minLength = len => val => val && (val.length >= len);
-const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-class Profile extends Component {
+class Savings extends Component {
 
     handleSubmit = (values) => {
-        this.props.addProfile(values);
+        alert('here');
+        this.props.addSavings(values);
         this.props.history.push("/home");
     }
 
@@ -26,10 +26,10 @@ class Profile extends Component {
                 <div className="container">
                     <LocalForm name="Account form" onSubmit={values => this.handleSubmit(values)}>
                                 <Row className="form-group">
-                                    <Label htmlFor="firstName" style={{color: "yellowgreen"}} md={2}>First Name</Label>
+                                    <Label htmlFor="savingsName" style={{color: "yellowgreen"}} md={2}>Name</Label>
                                     <Col md={10}>
-                                        <Control.text model=".firstName" id="firstName" name="firstName"
-                                            placeholder="First Name"
+                                        <Control.text model=".name" id="name" name="name"
+                                            placeholder="Name"
                                             className="form-control"
                                             validators={{
                                                 required, 
@@ -39,7 +39,7 @@ class Profile extends Component {
                                         />
                                         <Errors
                                             className="text-danger"
-                                            model=".firstName"
+                                            model=".name"
                                             show="touched"
                                             component="div"
                                             messages={{
@@ -51,20 +51,20 @@ class Profile extends Component {
                                     </Col>
                                 </Row>
                                 <Row className="form-group">
-                                    <Label htmlFor="lastName" md={2} style={{color: "yellowgreen"}}>Last Name</Label>
+                                    <Label htmlFor="amount" md={2} style={{color: "yellowgreen"}}>Amount</Label>
                                     <Col md={10}>
-                                        <Control.text model=".lastName" id="lastName" name="lastName"
-                                            placeholder="Last Name"
+                                        <Control.text model=".amount" id="amount" name="amount"
+                                            type="number"
+                                            placeholder="Amount"
                                             className="form-control"
                                             validators={{
-                                                required,
-                                                minLength: minLength(2),
-                                                maxLength: maxLength(15)
+                                                required
+                                                
                                             }}
                                         />
                                         <Errors
                                             className="text-danger"
-                                            model=".lastName"
+                                            model=".amount"
                                             show="touched"
                                             component="div"
                                             messages={{
@@ -76,19 +76,20 @@ class Profile extends Component {
                                     </Col>
                                 </Row>
                                 <Row className="form-group">
-                                    <Label htmlFor="email" style={{color: "yellowgreen"}} md={2}>Email</Label>
+                                    <Label htmlFor="frequency" style={{color: "yellowgreen"}} md={2}>Frequency</Label>
                                     <Col md={10}>
-                                        <Control.text model=".email" id="email" name="email"
-                                            placeholder="Email"
+                                        <Control.text model=".frequency" id="frequency" name="frequency"
+                                            type="number"
+                                            placeholder="Frequency"
                                             className="form-control"
                                             validators={{
-                                                required,
-                                                validEmail
+                                                required
+                                               
                                             }}
                                         />
                                         <Errors
                                             className="text-danger"
-                                            model=".email"
+                                            model=".frequency"
                                             show="touched"
                                             component="div"
                                             messages={{
@@ -99,39 +100,26 @@ class Profile extends Component {
                                     </Col>
                                 </Row>
                                 <Row className="form-group">
-                                    <Label htmlFor="userName" style={{color: "yellowgreen"}} md={2}>Username</Label>
-                                    <Col md={10}>
-                                        <Control.text model=".userName" id="userName" name="userName"
-                                            placeholder="Username"
+                                    <Label htmlFor="enable" style={{color: "yellowgreen"}} md={2}>Enable</Label>
+                                    <Col md={1}>
+                                        <Control.checkbox model=".enable" id="enable" name="enable"
                                             className="form-control"
+                                            defaultValue= {true}
                                             validators={{
-                                                required, 
-                                                minLength: minLength(2),
-                                                maxLength: maxLength(15)
+                                            
                                             }}
                                         />
                                         <Errors
                                             className="text-danger"
-                                            model=".userName"
+                                            model=".enable"
                                             show="touched"
                                             component="div"
                                             messages={{
-                                                required: 'Required',
-                                                minLength: 'Must be at least 2 characters',
-                                                maxLength: 'Must be 15 characters or less'
+                                               
                                             }}
                                         />
                                     </Col>
-                                </Row>
-                                <Row className="form-group">
-                                    <Label htmlFor="password" style={{color: "yellowgreen"}} md={2}>Password</Label>
-                                    <Col md={10}>
-                                        <Control.text model=".password" id="password" name="password"
-                                            className="form-control"
-                                            placeholder="6 caracters minimum"
-                                        />
-                                    </Col>
-                                </Row>                    
+                                </Row>            
                                 <Row className="form-group">
                                     <Col className="col-12 text-right" >
                                         <Link to='/'> 
@@ -159,10 +147,10 @@ class Profile extends Component {
     }
 }
 
-const mapStateToProps = state =>({ profile: state.profile })
+const mapStateToProps = state =>({ savings: state.savings })
 
 const mapDispatchToProps = {
-    addProfile
+    addSavings
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Savings));

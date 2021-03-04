@@ -1,4 +1,5 @@
 export const ADD_PROFILE = 'ADD_PROFILE';
 export const ADD_INCOME = 'ADD_INCOME';
+export const ADD_SAVINGS = 'ADD_SAVINGS';
 export const ADD_BILLS_MAIN = 'ADD_BILLS_MAIN';
 export const ADD_BILLS_SECONDARY = 'ADD_BILLS_SECONDARY';
