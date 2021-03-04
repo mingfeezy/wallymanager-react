@@ -47,10 +47,11 @@ const mapStateTothisProps = state => ({ bills: state.bills, savings: state.savin
             return `${+month.substring(1)}-${+day + +cycle}`
         }  
     }
-    // getNextCarBill(month, day, cycle = 30) {
-    //     l
-    //     return 
-    // }
+    getNextBill(month, day, cycle = 30) {
+        let BillInfo = {}
+        return BillInfo = {month:month,day:day,cycle:cycle}
+    }
+ 
     componentDidMount() {  
             }
 
