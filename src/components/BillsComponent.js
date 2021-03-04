@@ -5,6 +5,7 @@ import { Row, Col, Label,Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { addBills } from '../actions/ActionCreators'
+import { NavLink, Link } from 'react-router-dom';
 
 
 
@@ -34,19 +35,21 @@ const isNumber = val => !isNaN(+val);
     }
     handelSubmit(values) {
         console.log(values)
-        this.props.addBills(values)
+        this.props.addBills(values);
+        this.props.history.push("/home");
+    }
+    disableBtn = (e) => {
+        e.target.disabled = true
     }
     render() {
         return (
             <div>
 
                 <div className="container">
-                    <LocalForm name="billsform" onSubmit={(values) => this.handelSubmit(values)}>
+                    <LocalForm name="billsform" onSubmit={values => this.handelSubmit(values)}>
                         <Row className="form-group">
                             <Col md={3} className="billBox">
-                                <Label htmlFor="car" onClick={this.revealInput} className="billsLabel">
-                                    Car 
-                                </Label>
+                                <Label htmlFor="car" onClick={this.revealInput} className="billsLabel" id="carLabel" />
                                 {this.state.car ? <div><Control.text 
                                     name="car"
                                     model=".car"
@@ -68,10 +71,7 @@ const isNumber = val => !isNaN(+val);
                                     </div>: <div />}                      
                             </Col>
                             <Col md={3}>
-                                <Label htmlFor="rent" onClick={this.revealInput} className="billsLabel">
-                                    <img />
-                                    Rent
-                                </Label>
+                                <Label htmlFor="rent" onClick={this.revealInput} className="billsLabel" id="rentLabel" />
                                 {this.state.rent ? <div><Control.text 
                                     name="rent"
                                     model=".rent"
@@ -94,10 +94,7 @@ const isNumber = val => !isNaN(+val);
                                     </div>: <div />}     
                             </Col>
                             <Col md={3}>
-                                <Label htmlFor="phone" onClick={this.revealInput} className="billsLabel">
-                           
-                                    Phone
-                                </Label>
+                                <Label htmlFor="phone" onClick={this.revealInput} className="billsLabel" id="phoneLabel"/>
                                 {this.state.phone ? <div><Control.text 
                                     name="phone"
                                     model=".phone"
@@ -121,11 +118,7 @@ const isNumber = val => !isNaN(+val);
                             </Col>
                            
                             <Col md={3}>
-                                <Label htmlFor="misc" onClick={this.revealInput} className="billsLabel">
-                                
-                                <img />
-                                Misc
-                                </Label>
+                                <Label htmlFor="misc" onClick={this.revealInput} className="billsLabel" id="miscLabel" />
                                 {this.state.misc ? <div><Control.text 
                                     name="misc"
                                     model=".misc"
@@ -154,6 +147,17 @@ const isNumber = val => !isNaN(+val);
                                             Submit
                                         </Button>
                                     </Col>  
+                                    <Link to='/income'> 
+                                    <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
+                                        back
+                                    </Button>
+                                </Link>
+                                <Link to='/savings'> 
+                                <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
+                                    Next
+                                </Button>
+                            </Link>
+                                    
                         </Row>
                     </LocalForm>
                 </div>
@@ -164,7 +168,7 @@ const isNumber = val => !isNaN(+val);
 
 }
 
-const mapStateToProps = state => ({bills: state.bills})
+const mapStateToProps = state => ({ bills: state.bills })
 const mapDispatchToProps = {
     addBills
 }

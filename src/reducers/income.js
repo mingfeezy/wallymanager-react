@@ -1,7 +1,8 @@
-import { actionTypes } from "react-redux-form";
+import * as ActionTypes from '../actions/ActionTypes';
+
 const IncomeReducer = (state = [], action) => {
     switch(action.type) {
-        case actionTypes.ADD_INCOME:
+        case ActionTypes.ADD_INCOME:
             return {...state, income: action.payload}
         default:
             return state;

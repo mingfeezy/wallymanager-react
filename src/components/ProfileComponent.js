@@ -16,8 +16,12 @@ class Profile extends Component {
 
     handleSubmit = (values) => {
         this.props.addProfile(values);
-        this.props.history.push("/home");
+        // this.props.history.push("/home");
+        values.target.disabled = true
     }
+    // disableBtn = (e) => {
+    //     e.target.disabled = true
+    // }
 
 
     render() {
@@ -134,16 +138,16 @@ class Profile extends Component {
                                 </Row>                    
                                 <Row className="form-group">
                                     <Col className="col-12 text-right" >
-                                        <Link to='/'> 
-                                            <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
-                                                Cancel
-                                            </Button>
-                                        </Link>
+                                      
                                  
-                                        <Button className="ml-2" type="submit" style={{background: "black",border:"solid 1px yellowgreen"}} disabled={false}>
+                                        <Button className="ml-2" type="submit" style={{background: "black",border:"solid 1px yellowgreen"}} disabled={false} onClick={this.disableBtn}>
                                             Submit
                                         </Button>
-                                   
+                                        <Link to='/income'> 
+                                        <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
+                                            Next
+                                        </Button>
+                                    </Link>
                                
                                     {/* {renderButton} */}
                                     </Col>                           

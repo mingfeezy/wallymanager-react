@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
-import Header from './headerComponent';
+import Dashboard from './DashboardComponent';
+import Profile from './ProfileComponent';
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+
+
+
 
 class Home extends Component {
+    componentDidMount() {
+        console.log(this.props.bills)
+    }
     render() {
-        return (
-            <div>
-                
-            </div>
-        )
+        let checkUser = this.props.bills.bills;
+   
+            if (checkUser) {
+           return <Dashboard />
+        } else return <Profile />
+        
+        
     }
 }
 
-export default Home;
+
+const mapStateToProps = state => ({bills: state.bills})
+export default withRouter(connect(mapStateToProps)(Home));

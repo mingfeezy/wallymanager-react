@@ -4,9 +4,11 @@ import { Row, Col, Label,Button } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addIncome  } from '../actions/ActionCreators'
+import { addIncome  } from '../actions/ActionCreators';
+import { NavLink, Link } from 'react-router-dom';
 
 const isNumber = val => !isNaN(+val);
+const required = val => val && val.length;
 class Income extends Component {
     constructor(props) {
         super(props) 
@@ -20,10 +22,12 @@ class Income extends Component {
 
     handleSubmit(values) {
 
-  const date = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.startDate);
-
+  const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.startDate);
+  const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.startDate);
+        const date = `${day}-${month}`
         const data = {...values, payDay: date}
         this.props.addIncome(data)
+        this.props.history.push("/home");
 
     }
     handleChange(date) {
@@ -32,6 +36,9 @@ class Income extends Component {
         })
      
       }
+    //   disableBtn = (e) => {
+    //     e.target.disabled = true
+    // }
     
     render() {
         return (
@@ -49,6 +56,7 @@ class Income extends Component {
                                 className="form-control"
                                 placeholder="0.00$" 
                                 validators={{
+                                    required,
                                     isNumber
                                 }}     
                                 />
@@ -74,7 +82,7 @@ class Income extends Component {
                                 model=".cycle"
                                 className="form-control">
                                 <option value="7">weekly</option>
-                                <option value="15" selected>Bi weekly</option>
+                                <option value="15" defaultValue>Bi weekly</option>
                                 <option value="30">Monthly</option>
 
                             </Control.select>                          
@@ -101,10 +109,20 @@ class Income extends Component {
                     </Row>
                     <Row className="form-group">
                                 <Col className="col-3 col-md-1 " >                             
-                                    <Button className="text-white" type="submit"  style={{background: " #1CB5E0",border: "none",color: "white !important "}} color="primary" disabled={false}>
+                                    <Button className="text-white" type="submit"  style={{background: " #1CB5E0",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
                                         Submit
                                     </Button>
                                 </Col>  
+                            <Link to='/bills'> 
+                                <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
+                                    Next
+                                </Button>
+                            </Link>
+                            <Link to='/profile'> 
+                            <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
+                                back
+                            </Button>
+                        </Link>
                     </Row>
                 </LocalForm>
             </div>
