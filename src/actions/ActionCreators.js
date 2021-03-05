@@ -20,7 +20,7 @@ export const addProfile = ({
 });
 
 export const addSavings = ({
-    name= '',
+    description= '',
     amount = 0,
     frequency = 0,
     enable = true
@@ -28,10 +28,18 @@ export const addSavings = ({
     type: ActionTypes.ADD_SAVINGS,
     payload: {
         id:uuidv4(),
-        name, 
+        description, 
         amount,
         frequency,
         enable
+    }
+});
+
+export const updateSavings = (id, saving) => ({
+    type: ActionTypes.UPDATE_SAVINGS,
+    payload: {
+      id,
+      saving
     }
 });
 
@@ -63,7 +71,8 @@ export const addIncome = ({
     income= 0,
     cycle= 7,
     payDay= 0,
-    payMonth= 0
+    payMonth= 0,
+    date=''
     
 } = {}) => ({
     type:ActionTypes.ADD_INCOME,
@@ -72,7 +81,16 @@ export const addIncome = ({
         income,
         cycle,
         payDay,  
-        payMonth    
+        payMonth,
+        date    
     }
 })
+
+export const updateIncome = (id, incomeItem) => ({
+    type: ActionTypes.UPDATE_INCOME,
+    payload: {
+      id,
+      incomeItem
+    }
+});
 

@@ -31,10 +31,6 @@ const IncomeList = (props) => {
         </div>
     </div>
     ); 
-
-
-
-
 }
 
 const mapStateToProps = (state) => {

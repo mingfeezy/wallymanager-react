@@ -8,7 +8,7 @@ const SavingsList = (props) => (
             <h2>Savings</h2>
             <div className="row col-12 mx-auto" >
                 <div className='col-2'>
-                    <div>Description</div>
+                    <div>Name </div>
                 </div>
                 <div className='col-2'>
                     <div>Amount</div>
@@ -32,7 +32,7 @@ const SavingsList = (props) => (
 
 // gets current state so it can be used by component
 const mapStateToProps = state =>{
-    //console.log(state.savings);
+    console.log(state.savings);
     return {
         savings: state.savings
     }
