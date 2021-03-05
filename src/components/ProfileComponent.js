@@ -17,7 +17,7 @@ class Profile extends Component {
     handleSubmit = (values) => {
         this.props.addProfile(values);
         // this.props.history.push("/home");
-        values.target.disabled = true
+        // values.target.disabled = true
     }
     // disableBtn = (e) => {
     //     e.target.disabled = true

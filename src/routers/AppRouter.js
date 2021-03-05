@@ -25,3 +25,24 @@ const AppRouter = () => (
     </BrowserRouter>
 );
 export default AppRouter;
+
+
+// <p>{this.renderNextPayDate(this.props.income[0].cycle, this.props.income[0].payDay, this.props.income[0].payMonth)}</p>
+// const GetItNow = (bills = [], balance, nextPay) => {
+//     let instantBalance = +nextPay.amount 
+//     return (
+//         <span>{bills.map(bill => {
+//             if (bill.day < nextPay.day) {
+
+//                 // return   instantBalance -=  +bill.amount  
+//                   console.log('balance' + instantBalance)
+//                   return this.renderNextPayDate(this.props.income[0].cycle, this.props.income[0].payDay, this.props.income[0].payMonth)
+              
+//               } else {
+                 
+//                   return 'balance'
+//               }
+//         })}</span>
+//     )
+//     return instantBalance
+// }

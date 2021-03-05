@@ -4,7 +4,8 @@ import { Row, Col, Label,Button } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addIncome  } from '../actions/ActionCreators';
+import { addIncome, getNextPayDate  } from '../actions/ActionCreators';
+
 import { NavLink, Link } from 'react-router-dom';
 
 const isNumber = val => !isNaN(+val);
@@ -25,8 +26,9 @@ class Income extends Component {
   const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.startDate);
   const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.startDate);
         const date = `${day}-${month}`
-        const data = {...values, payDay: day, payMonth: month}
+        const data = {income: values.income,cycle: values.cycle, payDay: day, payMonth: month}
         this.props.addIncome(data)
+        this.props.getNextPayDate(data)
         this.props.history.push("/home");
 
     }
@@ -132,6 +134,7 @@ class Income extends Component {
 const mapStateToProps = state =>({ income: state.income })
 
 const mapDispatchToProps = {
-    addIncome
+    addIncome,
+    getNextPayDate
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Income));

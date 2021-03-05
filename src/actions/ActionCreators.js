@@ -75,4 +75,84 @@ export const addIncome = ({
         payMonth    
     }
 })
+export function getNextPayDate ({income, cycle, payDay, payMonth}
+)  {
+    console.log(income,cycle,payDay, payMonth)
 
+    if (+payDay + +cycle >= 30) {
+        return (
+            {
+                type: ActionTypes.ADD_NEXT_PAY_DATE,
+                payload: {
+                    payMonth:+payMonth,
+                    payDay:+payDay + +cycle,
+                    income: +income,
+                    cycle: cycle
+                }
+            }
+        )
+    } else return (
+        {
+            type: ActionTypes.ADD_NEXT_PAY_DATE,
+            payload: {
+                payMonth:+payMonth,
+                payDay:+payDay + +cycle,
+                income: +income,
+                cycle: +cycle
+            }
+        }
+    )
+                   
+
+}
+    
+
+// export const getNextPayDate = (income, cycle, payDay, payMonth) => {
+
+//     // if (+payDay + +cycle >= 30) {
+//     let nextDay = +payDay + 50;
+//     //  this.setState({payMonth: +month.substring(1) + 1, payDay:+day + +cycle - 30, income: amount })
+//         return {
+//             type: ActionTypes.ADD_NEXT_PAY_DATE,
+//             payload: {
+//                 payMonth:payMonth,
+//                 payDay:5,
+//                 // income: income ,
+               
+//             }
+//         }
+     
+//     // } else   {
+   
+//     //     return {
+//     //         type: ActionTypes.ADD_NEXT_PAY_DATE,
+//     //         payload: {
+//     //             payMonth:+payMonth,
+//     //             payDay:+payDay + +cycle,
+//     //             income: +income 
+//     //         }
+//     //     }
+        
+//     // }  
+// }
+
+// export const getNextPayDate = ({
+//     income= 0,
+//     cycle= 7,
+//     payDay= 0,
+//     payMonth= 0
+// }) =>  {
+//     return dispatch => {
+
+//         ({
+//             type: ActionTypes.ADD_NEXT_PAY_DATE,
+//                     payload: {
+//                         payMonth:+payMonth + 55,
+//                         payDay:5,
+//                         // income: income ,
+                       
+//                     }
+//         })
+//     }
+// }
+    
