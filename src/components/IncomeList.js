@@ -21,6 +21,9 @@ const IncomeList = (props) => {
                 <div className='col-2'>
                     <div>Pay Month</div>
                 </div>
+                <div className='col-2'>
+                    <div>Date</div>
+                </div>
             </div>
         </div>
         <div>
