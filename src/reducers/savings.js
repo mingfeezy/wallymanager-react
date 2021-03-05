@@ -6,8 +6,6 @@ const SavingsReducer = (state = [], action) => {
             return [...state, action.payload]
         case ActionTypes.UPDATE_SAVINGS:
             return state.map((saving)=>{
-                console.log(saving.id);
-                console.log(action.payload);
                 if(saving.id === action.payload.id) {
                     return {
                         ...saving,
@@ -16,6 +14,10 @@ const SavingsReducer = (state = [], action) => {
                 } else {
                     return saving;
                 }
+            });
+        case ActionTypes.DELETE_SAVINGS:
+            return state.filter(({id})=>{
+                return id !== action.id
             });
         default:
             return state;

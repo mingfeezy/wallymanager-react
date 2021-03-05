@@ -17,6 +17,10 @@ const IncomeReducer = (state = [], action) => {
                     return incomeItem;
                 }
             });
+        case ActionTypes.DELETE_INCOME:
+            return state.filter(({id})=>{
+                return id !== action.id
+            });
         default:
             return state;
     }

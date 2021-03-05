@@ -43,6 +43,11 @@ export const updateSavings = (id, saving) => ({
     }
 });
 
+export const deleteSavings = ({id} = {}) => ({
+    type: ActionTypes.DELETE_SAVINGS,
+    id
+});
+
 export const addBills = ({
     car= 0,
     rent= 0,
@@ -92,5 +97,10 @@ export const updateIncome = (id, incomeItem) => ({
       id,
       incomeItem
     }
+});
+
+export const deleteIncome = ({id}) => ({
+    type: ActionTypes.DELETE_INCOME,
+    id
 });
 

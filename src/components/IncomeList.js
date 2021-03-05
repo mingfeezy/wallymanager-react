@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { deleteIncome } from '../actions/ActionCreators';
 import IncomeListItem from './IncomeListItem';
+
 
 const IncomeList = (props) => {
 
@@ -28,7 +30,12 @@ const IncomeList = (props) => {
         </div>
         <div>
             {props.income && props.income.map((incomeItem)=>{
-                    return <IncomeListItem key={incomeItem.id} {...incomeItem}/>
+                    return <IncomeListItem key={incomeItem.id} {...incomeItem}
+                     onClick={(id)=> {
+                            props.deleteIncome({id});
+                        }
+                    }
+                    />
                 }) 
             }
         </div>
@@ -42,4 +49,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(IncomeList);
+const mapDispatchToProps = {
+    deleteIncome: (id) => deleteIncome(id)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(IncomeList);
