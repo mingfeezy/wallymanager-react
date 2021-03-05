@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SavingsListItem from './SavingsListItem';
-import { deleteSavings } from '../actions/ActionCreators';
 
 const SavingsList = (props) => (
     <div>
@@ -9,7 +8,7 @@ const SavingsList = (props) => (
             <h2>Savings</h2>
             <div className="row col-12 mx-auto" >
                 <div className='col-2'>
-                    <div>Description</div>
+                    <div>Name </div>
                 </div>
                 <div className='col-2'>
                     <div>Amount</div>
@@ -24,30 +23,20 @@ const SavingsList = (props) => (
         </div>
         <div>
             {props.savings && props.savings.map((saving)=>{
-                    console.log(props);
-                    return (<SavingsListItem 
-                    key={saving.id} 
-                    {...saving} 
-                    onClick={(id)=> {
-                            props.deleteSavings({id});
-                        }
-                    }
-                />)
-            })}
+                    return <SavingsListItem key={saving.id} {...saving}/>
+                }) 
+            }
         </div>
     </div>
 );
 
 // gets current state so it can be used by component
 const mapStateToProps = state =>{
+    console.log(state.savings);
     return {
         savings: state.savings
     }
 }
 
-const mapDispatchToProps =  {
-    deleteSavings: ((id) => deleteSavings(id))
-}
-
 // allow componets to talk to the store
-export default connect(mapStateToProps, mapDispatchToProps)(SavingsList);
+export default connect(mapStateToProps)(SavingsList);

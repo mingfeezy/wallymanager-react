@@ -4,8 +4,10 @@ import Home from '../components/HomeComponent';
 import Bills from '../components/BillsComponent';
 import Profile from '../components/ProfileComponent';
 import Header from '../components/headerComponent'
-import Income from '../components/IncomeComponent';
-import Savings from '../components/SavingsComponent';
+import AddIncomePage from '../components/AddIncomePage';
+import UpdateIncomePage from '../components/UpdateIncomePage';
+import AddSavingsPage from '../components/AddSavingsPage';
+import UpdateSavingsPage from '../components/UpdateSavingsPage';
 import Dashboard from '../components/DashboardComponent';
 import Manager from '../components/ManagerComponent'
 
@@ -18,9 +20,11 @@ const AppRouter = () => (
             <Route path='/manager' component={Manager}/>
             <Route path='/bills' component={Bills}/>
             <Route path='/profile' component={Profile}/>
-            <Route path='/income' component={Income}/>
-            <Route path='/savings' component={Savings}/>
-            <Redirect to='/home' />
+            <Route path='/addIncome' component={AddIncomePage}/>
+            <Route path='/updateIncome/:id' component={UpdateIncomePage}/>
+            <Route path='/addSavings' component={AddSavingsPage}/>  
+            <Route path='/updateSavings/:id' component={UpdateSavingsPage}/>  
+            <Redirect to='/' />
         </Switch>
     </BrowserRouter>
 );
