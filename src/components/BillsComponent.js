@@ -10,9 +10,7 @@ import DatePicker from 'react-datepicker';
 
 
 
-
 const isNumber = val => !isNaN(+val);
-
  class Bills extends Component {
      constructor(props) {
          super(props) 
@@ -20,11 +18,11 @@ const isNumber = val => !isNaN(+val);
              car: false,
              rent: false,
              phone: false,
-            //  netflixBillInput: false,
              misc: false,
              carBillDate: null,
-             rentBillDate: null
-       
+             rentBillDate: null,
+             billsName: [],
+             billsValues: []
          }
          this.revealInput = this.revealInput.bind(this);
          this.handleChangeCarBillDate = this.handleChangeCarBillDate.bind(this);
@@ -32,11 +30,8 @@ const isNumber = val => !isNaN(+val);
      }
     
     revealInput(e) {
- 
         let input = e.target.htmlFor;
         this.setState({[input]: !this.state[input]})
-      
-    
     }
     handelSubmit(values) {
         const dayCar = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.carBillDate);
@@ -44,13 +39,19 @@ const isNumber = val => !isNaN(+val);
         const dayRent = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.rentBillDate);
         const monthRent = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.rentBillDate);
         const data = {...values, dayCar: dayCar,monthCar: monthCar,dayRent: dayRent,monthRent: monthRent}
-        console.log(data)
+        console.log(values)
         this.props.addBills(data);
-        // this.props.history.push("/home");
     }
+    handleFormChanges(values) {
+        this.setState({
+            billsName: Object.keys(values),
+            billsValues: Object.values(values)
+        })
+    }
+    
     handleChangeCarBillDate(date) {
         this.setState({
-            carBillDate: date
+            carBillDate: date,
         })
      
       }
@@ -58,17 +59,27 @@ const isNumber = val => !isNaN(+val);
         this.setState({
             rentBillDate: date
         })
-     
       }
     disableBtn = (e) => {
         e.target.disabled = true
     }
     render() {
+        const billNames = this.state.billsName.map(bill => {
+            console.log(bill)
+            return (            
+                     <th>{bill}</th>         
+            )
+        })
+        const billValues = this.state.billsValues.map(value => {
+            console.log(value)
+            return ( <td>{value}</td>)            
+        })
+
         return (
             <div>
 
                 <div className="container">
-                    <LocalForm name="billsform" onSubmit={values => this.handelSubmit(values)}>
+                    <LocalForm name="billsform" onSubmit={values => this.handelSubmit(values)} onChange={values => this.handleFormChanges(values)}>
                         <Row className="form-group">
                             <Col md={3} className="billBox">
                                 <Label htmlFor="car" onClick={this.revealInput} className="billsLabel" id="carLabel" />
@@ -90,7 +101,6 @@ const isNumber = val => !isNaN(+val);
                                             isNumber: 'Must be a number'      
                                         }}
                                     />
-                                    </div>: <div />}  
                                     <DatePicker
                                     model=".carBillDate"
                                     name="carBillDate"
@@ -99,8 +109,9 @@ const isNumber = val => !isNaN(+val);
                                     name="carBillDate"
                                     dateFormat="MM-dd-yyyy"
                                     calendarWeeks={true}
-                                    inputPlaceholder="Select a date"
+                                    placeholderText="Select a date "
                                 />                    
+                                    </div>: <div />}  
                             </Col>
                             <Col md={3}>
                                 <Label htmlFor="rent" onClick={this.revealInput} className="billsLabel" id="rentLabel" />
@@ -123,17 +134,17 @@ const isNumber = val => !isNaN(+val);
                                     
                                     }}
                                     />
-                                    </div>: <div />}
                                     <DatePicker
                                     model=".rentBillDate"
                                     name="rentBillDate"
                                     selected={ this.state.rentBillDate }
                                     onChange={ this.handleChangeRentBillDate }
                                     name="rentBillDate"
-                                    dateFormat="MM-dd"
+                                    dateFormat="MM-dd-yyyy"
                                     calendarWeeks={true}
-                                    inputPlaceholder="Select a date"
+                                    placeholderText="Select a date"
                                 />                 
+                                    </div>: <div />}
                             </Col>
                             <Col md={3}>
                                 <Label htmlFor="phone" onClick={this.revealInput} className="billsLabel" id="phoneLabel"/>
@@ -198,10 +209,22 @@ const isNumber = val => !isNaN(+val);
                                 <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
                                     Next
                                 </Button>
-                            </Link>
-                                    
+                            </Link>                   
                         </Row>
                     </LocalForm>
+                </div>
+                <div className="container mb-5">
+                    <h1>drop down</h1>
+                    <p>{this.state.billsName.car}
+                    </p>
+                    <table>
+                        <tr>
+                            {billNames} 
+                        </tr>
+                        <tr>
+                            {billValues}
+                        </tr>
+                    </table>   
                 </div>
             </div>
      

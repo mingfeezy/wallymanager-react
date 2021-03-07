@@ -3,7 +3,7 @@ import { Row, Col, Label,Button } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import { withRouter } from 'react-router-dom';
 import { NavLink, Link } from 'react-router-dom';
-import { Form, Field } from 'react-final-form'
+import { Form, Field } from 'react-final-form';
 
 
 class IncomeForm extends Component {
