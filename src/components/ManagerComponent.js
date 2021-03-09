@@ -23,6 +23,7 @@ import { Table } from 'reactstrap';
 //     }  
 // }
 
+
 const mapStateTothisProps = state => ({ management: state.management, bills: state.bills, savings: state.savings, income: state.income, profile: state.profile })
 
     class Manager extends Component {
@@ -39,7 +40,9 @@ const mapStateTothisProps = state => ({ management: state.management, bills: sta
             income: null
          }
          this.getBalance = this.getBalance.bind(this);
+         
      }
+     
       getBalance(bills , balance, payDay) {
         
             if (bills.bills.dayCar < payDay && bills.bills.dayRent < payDay) {
@@ -51,14 +54,13 @@ const mapStateTothisProps = state => ({ management: state.management, bills: sta
                 }
  
     }
-    componentDidMount() {
-        this.getBalance(this.props.bills, this.props.management.income, this.props.management.payDay)
+    
+    componentDidMouncomt() {
+            this.getBalance(this.props.bills, this.props.management.income, this.props.management.payDay) 
     }
     
     render() {
-        let checkStatus = this.props.bills.bills
-        let checkS = this.props.income[0]
-        if (checkStatus || checkS) {
+        
             return (
                 <div>
                     <h1>next pay {this.props.management.payDay} - {this.props.management.payMonth}</h1>
@@ -66,7 +68,7 @@ const mapStateTothisProps = state => ({ management: state.management, bills: sta
                     <h3>balance :{this.state.balance}</h3>
                 </div>
             )
-        } else return <h1>Welcome to Manager, please fill the forms</h1>
+
         
     }
 }

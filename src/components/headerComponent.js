@@ -34,7 +34,7 @@ class Header extends Component {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/addIncome">
+                                <NavLink className="nav-link" to="/Income">
                                     <i className="fa fa-list fa-lg" /> Income
                                 </NavLink>
                             </NavItem>

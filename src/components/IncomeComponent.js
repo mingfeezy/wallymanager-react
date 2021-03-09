@@ -14,8 +14,9 @@ class Income extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            startDate: new Date()
-         
+            startDate: new Date(),
+            nextBtn: true,
+            nextBtnColor: 'black'
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -23,13 +24,18 @@ class Income extends Component {
 
     handleSubmit(values) {
 
-  const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.startDate);
-  const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.startDate);
+        const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.startDate);
+        const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.startDate);
         const date = `${day}-${month}`
         const data = {income: values.income,cycle: values.cycle, payDay: day, payMonth: month}
+
         this.props.addIncome(data)
         this.props.getNextPayDate(data)
-        this.props.history.push("/home");
+        // this.props.history.push("/home");
+        this.setState({
+            nextBtn: false,
+            nextBtnColor: 'darkblue'
+        })
 
     }
     handleChange(date) {
@@ -44,12 +50,12 @@ class Income extends Component {
     
     render() {
         return (
-            <div className="container">
-                    <LocalForm name="incomeForm" onSubmit={(values) => this.handleSubmit(values)}>
+        
+                <LocalForm name="incomeForm" className="container mt-5" onSubmit={(values) => this.handleSubmit(values)}>
                     <Row className="form-group">
-                        <Col md={3}>
-                            <Label htmlFor="income" onClick={this.revealInput}>
-                                Net income 
+                        <Col md={4}>
+                            <Label htmlFor="income">
+                                <h4>Net income </h4>
                             </Label>
                             <Control.text
                                 id="income" 
@@ -73,10 +79,9 @@ class Income extends Component {
                                 />
                                                     
                         </Col>
-                        <Col md={3}>
-                            <Label htmlFor="cycle" onClick={this.revealInput}>
-
-                                pay cycle
+                        <Col md={4}>
+                            <Label htmlFor="cycle">
+                                <h4>Pay cycle</h4>
                             </Label>
                             <Control.select 
                                 id="cycle"
@@ -86,16 +91,17 @@ class Income extends Component {
                                 <option value="7">weekly</option>
                                 <option value="15">Bi weekly</option>
                                 <option value="30">Monthly</option>
-
                             </Control.select>                          
                         </Col>
-                        <Col>
-                        <Label htmlFor="payday" onClick={this.revealInput}>
+                        <Col md={4}>
+                            <Label htmlFor="payday">
 
-                        Next pay date
-                        </Label>
-                        
-                            <DatePicker
+                                <h4>Next pay date</h4>
+                            </Label>
+                             
+                            <div className="customDatePickerWidth">
+                                <DatePicker
+                                    className="dateP"
                                     model=".payday"
                                     name="payday"
                                     selected={ this.state.startDate }
@@ -104,30 +110,32 @@ class Income extends Component {
                                     dateFormat="MM-dd-yyyy"
                                     calendarWeeks={true}
                                     inputPlaceholder="Select a date"
-                                />
+                                    />
+                            </div> 
+                               
                         
                         </Col>
         
                     </Row>
-                    <Row className="form-group">
-                                <Col className="col-3 col-md-1 " >                             
-                                    <Button className="text-white" type="submit"  style={{background: " #1CB5E0",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
-                                        Submit
-                                    </Button>
-                                </Col>  
-                            <Link to='/bills'> 
-                                <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
-                                    Next
-                                </Button>
-                            </Link>
-                            <Link to='/profile'> 
-                            <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
-                                back
+                    <Row className="offset-md-9 offset-5 mt-5">  
+                    
+                        <Link to='/home'> 
+                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'darkblue'}} disabled={false}>
+                                <i className="fa fa-arrow-left" style={{color: 'darkblue'}} /> back
                             </Button>
                         </Link>
+                        <Link to='/bills'> 
+                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: this.state.nextBtnColor}} disabled={this.state.nextBtn}>
+                                Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
+                            </Button>
+                        </Link>
+                            <Button className="text-white" type="submit"  style={{backgroundColor: "darkblue",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
+                                Confirm
+                            </Button>
+                                                    
                     </Row>
                 </LocalForm>
-            </div>
+            
         )
     }
 }

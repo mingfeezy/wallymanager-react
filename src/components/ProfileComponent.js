@@ -13,11 +13,22 @@ const minLength = len => val => val && (val.length >= len);
 const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class Profile extends Component {
+    constructor(props) {
+        super(props) 
+        this.state ={
+            nextBtn: true,
+            nextBtnColor: 'black'
+        }
+    }
 
     handleSubmit = (values) => {
         this.props.addProfile(values);
         // this.props.history.push("/home");
         // values.target.disabled = true
+        this.setState({
+            nextBtn: false,
+            nextBtnColor: 'darkblue'
+        })
     }
     // disableBtn = (e) => {
     //     e.target.disabled = true
@@ -136,25 +147,20 @@ class Profile extends Component {
                                         />
                                     </Col>
                                 </Row>                    
-                                <Row className="form-group">
-                                    <Col className="col-12 text-right" >
-                                      
-                                 
-                                        <Button className="ml-2" type="submit" style={{background: "black",border:"solid 1px yellowgreen"}} disabled={false} onClick={this.disableBtn}>
-                                            Submit
+                                <Row className="offset-md-9 offset-5 mt-5"> 
+                                    <Link to='/home'> 
+                                        <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'darkblue'}} disabled={false}>
+                                            <i className="fa fa-arrow-left" style={{color: 'darkblue'}} /> back
                                         </Button>
-                                        <Link to='/income'> 
-                                        <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
-                                            Next
+                                    </Link>    
+                                    <Link to='/income'> 
+                                        <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: this.state.nextBtnColor}} disabled={this.state.nextBtn}>
+                                            Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
                                         </Button>
                                     </Link>
-                               
-                                    {/* {renderButton} */}
-                                    </Col>                           
-                                    <Col>
-                                   
-                                    {/* {renderButton} */}
-                                    </Col>                           
+                                    <Button className="text-white" type="submit" style={{backgroundColor: "darkblue",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
+                                        Confirm
+                                    </Button>
                                 </Row>
                             </LocalForm>
                     </div>

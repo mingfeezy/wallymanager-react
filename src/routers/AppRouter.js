@@ -10,6 +10,7 @@ import AddSavingsPage from '../components/AddSavingsPage';
 import UpdateSavingsPage from '../components/UpdateSavingsPage';
 import Dashboard from '../components/DashboardComponent';
 import Manager from '../components/ManagerComponent'
+import Income from '../components/IncomeComponent'
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -20,11 +21,11 @@ const AppRouter = () => (
             <Route path='/manager' component={Manager}/>
             <Route path='/bills' component={Bills}/>
             <Route path='/profile' component={Profile}/>
-            <Route path='/addIncome' component={AddIncomePage}/>
+            <Route path='/income' component={Income}/>
             <Route path='/updateIncome/:id' component={UpdateIncomePage}/>
             <Route path='/addSavings' component={AddSavingsPage}/>  
             <Route path='/updateSavings/:id' component={UpdateSavingsPage}/>  
-            <Redirect to='/' />
+            <Redirect to='/home' />
         </Switch>
     </BrowserRouter>
 );

@@ -31,7 +31,10 @@ const isNumber = val => !isNaN(+val);
              wirelessBillDay: null,
              billsName: [],
              billsValues: [],
-             billsDates: []
+             billsDates: [],
+             nextBtn: true,
+             nextBtn: true,
+            nextBtnColor: 'black'
          }
          this.revealInput = this.revealInput.bind(this);
          this.handleChangeBillDate = this.handleChangeBillDate.bind(this);
@@ -50,6 +53,10 @@ const isNumber = val => !isNaN(+val);
         const data = {...values, dayCar: dayCar,monthCar: monthCar,dayRent: dayRent,monthRent: monthRent}
         console.log(values)
         this.props.addBills(data);
+        this.setState({
+            nextBtn: false,
+            nextBtnColor: 'darkblue'
+        })
     }
     handleFormChanges(values) {
         
@@ -94,17 +101,18 @@ const isNumber = val => !isNaN(+val);
         return (
             <div>
 
-                <div className="container">
+                <div className="container mt-5">
                     <LocalForm name="billsform" onSubmit={values => this.handelSubmit(values)} onChange={values => this.handleFormChanges(values)}>
                         <Row className="form-group">
                             
                             <Col md={3}>
                                 <Card>   
-                                    <CardBody style={{border: "solid 1px green", borderRadius: "5px"}} className="p-3">
+                                    <CardBody style={{border: "solid 1px darkblue", borderRadius: "5px"}} className="p-3">
                                         <CardTitle><h4>Car</h4></CardTitle>
                                         <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your car note monthly amount</CardSubtitle>
                                         <CardText className="my-2">
-                                            <Control.text           
+                                            <Control.text   
+                                                style={{border: "solid 1px darkblue", borderRadius: "5px"}}         
                                                 name="car"
                                                 model=".car"
                                                 className="form-control"
@@ -122,9 +130,9 @@ const isNumber = val => !isNaN(+val);
                                                     isNumber: 'Must be a number'      
                                                 }}
                                             />
-                                            <div className="customDatePickerWidth">
+                                            <div className="customDatePickerWidthInput customDatePickerWidth">
                                                 <DatePicker
-                                                    style={{border: 'solid 1px white'}}
+                                                    
                                                     wrapperClassName="datePicker"
                                                     className="form-control borderPicker"
                                                     model=".carBillDate"
@@ -144,11 +152,12 @@ const isNumber = val => !isNaN(+val);
             
                             <Col md={3}>
                             <Card>   
-                                <CardBody style={{border: "solid 1px green", borderRadius: "5px"}} className="p-3">
+                                <CardBody style={{border: "solid 1px darkblue", borderRadius: "5px"}} className="p-3">
                                     <CardTitle><h4>Rent</h4></CardTitle>
                                     <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your rent monthly payment</CardSubtitle>
                                     <CardText className="my-2">
-                                        <Control.text           
+                                        <Control.text  
+                                            style={{border: "solid 1px darkblue", borderRadius: "5px"}}          
                                             name="rent"
                                             model=".rent"
                                             className="form-control"
@@ -166,10 +175,10 @@ const isNumber = val => !isNaN(+val);
                                                 isNumber: 'Must be a number'      
                                             }}
                                         />
-                                        <div className="customDatePickerWidth">
+                                        <div className="customDatePickerWidthInput customDatePickerWidth">
                                             <DatePicker
-                                                style={{border: 'solid 1px white'}}
-                                                wrapperClassName="datePicker"
+                                                
+                                            
                                                 className="form-control borderPicker"
                                                 model=".rentBillDate"
                                                 name="rentBillDate"
@@ -188,11 +197,12 @@ const isNumber = val => !isNaN(+val);
                             
                             <Col md={3}>
                             <Card>   
-                                <CardBody style={{border: "solid 1px green", borderRadius: "5px"}} className="p-3">
+                                <CardBody style={{border: "solid 1px darkblue", borderRadius: "5px"}} className="p-3">
                                     <CardTitle><h4>Wireless</h4></CardTitle>
                                     <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your phone monthly payment.</CardSubtitle>
                                     <CardText className="my-2">
-                                        <Control.text           
+                                        <Control.text
+                                            style={{border: "solid 1px darkblue", borderRadius: "5px"}}            
                                             name="wireless"
                                             model=".wireless"
                                             className="form-control"
@@ -210,9 +220,10 @@ const isNumber = val => !isNaN(+val);
                                                 isNumber: 'Must be a number'      
                                             }}
                                         />
-                                        <div className="customDatePickerWidth">
+                                        <div className="customDatePickerWidthInput customDatePickerWidth">
                                             <DatePicker
-                                                style={{border: 'solid 1px white'}}
+                                                
+                                                // style={{border: 'solid 1px white'}}
                                                 wrapperClassName="datePicker"
                                                 className="form-control borderPicker"
                                                 model=".wirelessBillDate"
@@ -231,11 +242,12 @@ const isNumber = val => !isNaN(+val);
                         </Col>  
                         <Col md={3}>
                         <Card>   
-                            <CardBody style={{border: "solid 1px green", borderRadius: "5px"}} className="p-3">
+                            <CardBody style={{border: "solid 1px darkblue", borderRadius: "5px"}} className="p-3">
                                 <CardTitle><h4>Insurances</h4></CardTitle>
                                 <CardSubtitle style={{color: "rgb(61, 53, 53)"}}> All your insurances payments.</CardSubtitle>
                                 <CardText className="my-2">
-                                    <Control.text           
+                                    <Control.text  
+                                        style={{border: "solid 1px darkblue", borderRadius: "5px"}}         
                                         name="insurances"
                                         model=".insurances"
                                         className="form-control"
@@ -253,8 +265,8 @@ const isNumber = val => !isNaN(+val);
                                             isNumber: 'Must be a number'      
                                         }}
                                     />
-                                    <div className="customDatePickerWidth">
-                                        <CardSubtitle style={{color: "rgb(61, 53, 53)"}} className="mt-2 mb-3">First of every month </CardSubtitle>
+                                    <div>
+                                        <CardSubtitle style={{color: "rgb(61, 53, 53)"}} className="mt-2 mb-4">First of every month </CardSubtitle>
                                     </div>                
                                 </CardText>
                             </CardBody>
@@ -264,21 +276,22 @@ const isNumber = val => !isNaN(+val);
           
                    
                     </Row>
-                        <Row className="form-group ml-1">                         
-                            <Link to='/addIncome'> 
-                                <Button className="col" color="secondary" style={{background: "black"}} disabled={false}>
-                                back
-                                </Button>
-                            </Link>
-                            <Link to='/addSavings'> 
-                                <Button className="col" color="secondary" style={{background: "black"}} disabled={false}>
-                                Next
-                                </Button>
-                            </Link>                   
-                                <Button className="text-white offset-6 offset-md-9" type="submit"  style={{background: " #1CB5E0",border: "none",color: "white !important "}} color="primary" disabled={false}>
-                                    Confirm
-                                </Button>
-                        </Row>
+                    <Row className="offset-md-9 offset-5 mt-5">                         
+                        <Link to='/addIncome'> 
+                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'darkblue'}} disabled={false}>
+                                <i className="fa fa-arrow-left" style={{color: 'darkblue'}} /> back
+                            </Button>
+                        </Link>
+                        <Link to='/addSavings'> 
+                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: this.state.nextBtnColor}} disabled={this.state.nextBtn}>
+                                Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
+                            </Button>
+                        </Link>                   
+                            <Button className="text-white" type="submit"  style={{backgroundColor: "darkblue",border: "none",color: "white !important "}} color="primary" disabled={false}>
+                                Confirm
+                            </Button>
+                    </Row>
+              
                     </LocalForm>
                 </div>
                 <div className="container mb-5">
