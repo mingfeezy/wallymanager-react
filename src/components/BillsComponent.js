@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-
-import { Row, Col, Label,Button } from 'reactstrap';
+import {
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button
+  } from 'reactstrap';
+import { Row, Col, Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { addBills } from '../actions/ActionCreators'
@@ -18,15 +21,21 @@ const isNumber = val => !isNaN(+val);
              car: false,
              rent: false,
              phone: false,
-             misc: false,
+             gym: false,
+             insurances: false,
              carBillDate: null,
+             carBillDay: null,
              rentBillDate: null,
+             rentBillDay: null,
+             wirelessBillDate: null,
+             wirelessBillDay: null,
              billsName: [],
-             billsValues: []
+             billsValues: [],
+             billsDates: []
          }
          this.revealInput = this.revealInput.bind(this);
-         this.handleChangeCarBillDate = this.handleChangeCarBillDate.bind(this);
-         this.handleChangeRentBillDate = this.handleChangeRentBillDate.bind(this);
+         this.handleChangeBillDate = this.handleChangeBillDate.bind(this);
+  
      }
     
     revealInput(e) {
@@ -43,37 +52,44 @@ const isNumber = val => !isNaN(+val);
         this.props.addBills(data);
     }
     handleFormChanges(values) {
+        
         this.setState({
             billsName: Object.keys(values),
             billsValues: Object.values(values)
         })
     }
     
-    handleChangeCarBillDate(date) {
+    handleChangeBillDate(date) {
+        if (this.state.billsDates.length === 3) {
+            this.setState({
+                billsDates: [...this.state.billsDates, new Intl.DateTimeFormat('en', { day: '2-digit', month: '2-digit' }).format(date), '03/01']
+            })
+        }
         this.setState({
-            carBillDate: date,
+            billsDates: [...this.state.billsDates, new Intl.DateTimeFormat('en', { day: '2-digit', month: '2-digit' }).format(date)]
         })
      
-      }
-    handleChangeRentBillDate(date) {
-        this.setState({
-            rentBillDate: date
-        })
       }
     disableBtn = (e) => {
         e.target.disabled = true
     }
     render() {
-        const billNames = this.state.billsName.map(bill => {
+        const billNames = this.state.billsName.map((bill, i) => {
             console.log(bill)
             return (            
-                     <th>{bill}</th>         
+                     <th key={i}>{bill}</th>         
             )
-        })
-        const billValues = this.state.billsValues.map(value => {
+        });
+        const billValues = this.state.billsValues.map((value, i) => {
             console.log(value)
-            return ( <td>{value}</td>)            
-        })
+            return ( <td key={i}>{value}</td>)            
+        });
+        const billDates = this.state.billsDates.map((date,i) => {
+       
+            return (
+                <td key={i}>{date}</td>
+            )
+        });
 
         return (
             <div>
@@ -81,150 +97,209 @@ const isNumber = val => !isNaN(+val);
                 <div className="container">
                     <LocalForm name="billsform" onSubmit={values => this.handelSubmit(values)} onChange={values => this.handleFormChanges(values)}>
                         <Row className="form-group">
-                            <Col md={3} className="billBox">
-                                <Label htmlFor="car" onClick={this.revealInput} className="billsLabel" id="carLabel" />
-                                {this.state.car ? <div><Control.text 
-                                    name="car"
-                                    model=".car"
-                                    className="form-control"
-                                    placeholder="0.00$" 
-                                    validators={{
-                                        isNumber
-                                    }}     
+                            
+                            <Col md={3}>
+                                <Card>   
+                                    <CardBody style={{border: "solid 1px green", borderRadius: "5px"}} className="p-3">
+                                        <CardTitle><h4>Car</h4></CardTitle>
+                                        <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your car note monthly amount</CardSubtitle>
+                                        <CardText className="my-2">
+                                            <Control.text           
+                                                name="car"
+                                                model=".car"
+                                                className="form-control"
+                                                placeholder="0.00$" 
+                                                validators={{
+                                                    isNumber
+                                                }}     
+                                            />
+                                            <Errors
+                                                className="text-danger"
+                                                model=".car"
+                                                show="touched"
+                                                component="div"
+                                                messages={{
+                                                    isNumber: 'Must be a number'      
+                                                }}
+                                            />
+                                            <div className="customDatePickerWidth">
+                                                <DatePicker
+                                                    style={{border: 'solid 1px white'}}
+                                                    wrapperClassName="datePicker"
+                                                    className="form-control borderPicker"
+                                                    model=".carBillDate"
+                                                    name="carBillDate"
+                                                    selected={ this.state.carBillDate }
+                                                    onChange={ this.handleChangeBillDate }
+                                                    name="carBillDate"
+                                                    dateFormat="MM-dd-yyyy"
+                                                    calendarWeeks={true}
+                                                    placeholderText="Select a date "
+                                                />    
+                                            </div>                
+                                        </CardText>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+            
+                            <Col md={3}>
+                            <Card>   
+                                <CardBody style={{border: "solid 1px green", borderRadius: "5px"}} className="p-3">
+                                    <CardTitle><h4>Rent</h4></CardTitle>
+                                    <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your rent monthly payment</CardSubtitle>
+                                    <CardText className="my-2">
+                                        <Control.text           
+                                            name="rent"
+                                            model=".rent"
+                                            className="form-control"
+                                            placeholder="0.00$" 
+                                            validators={{
+                                                isNumber
+                                            }}     
+                                        />
+                                        <Errors
+                                            className="text-danger"
+                                            model=".rent"
+                                            show="touched"
+                                            component="div"
+                                            messages={{
+                                                isNumber: 'Must be a number'      
+                                            }}
+                                        />
+                                        <div className="customDatePickerWidth">
+                                            <DatePicker
+                                                style={{border: 'solid 1px white'}}
+                                                wrapperClassName="datePicker"
+                                                className="form-control borderPicker"
+                                                model=".rentBillDate"
+                                                name="rentBillDate"
+                                                selected={ this.state.rentBillDate }
+                                                onChange={ this.handleChangeBillDate }
+                                                name="rentBillDate"
+                                                dateFormat="MM-dd-yyyy"
+                                                calendarWeeks={true}
+                                                placeholderText="Select a date "
+                                            />    
+                                        </div>                
+                                    </CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                            
+                            <Col md={3}>
+                            <Card>   
+                                <CardBody style={{border: "solid 1px green", borderRadius: "5px"}} className="p-3">
+                                    <CardTitle><h4>Wireless</h4></CardTitle>
+                                    <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your phone monthly payment.</CardSubtitle>
+                                    <CardText className="my-2">
+                                        <Control.text           
+                                            name="wireless"
+                                            model=".wireless"
+                                            className="form-control"
+                                            placeholder="0.00$" 
+                                            validators={{
+                                                isNumber
+                                            }}     
+                                        />
+                                        <Errors
+                                            className="text-danger"
+                                            model=".wireless"
+                                            show="touched"
+                                            component="div"
+                                            messages={{
+                                                isNumber: 'Must be a number'      
+                                            }}
+                                        />
+                                        <div className="customDatePickerWidth">
+                                            <DatePicker
+                                                style={{border: 'solid 1px white'}}
+                                                wrapperClassName="datePicker"
+                                                className="form-control borderPicker"
+                                                model=".wirelessBillDate"
+                                                name="wirelessBillDate"
+                                                selected={ this.state.wirelessBillDate }
+                                                onChange={ this.handleChangeBillDate }
+                                                name="wirelessBillDate"
+                                                dateFormat="MM-dd-yyyy"
+                                                calendarWeeks={true}
+                                                placeholderText="Select a date "
+                                            />    
+                                        </div>                
+                                    </CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>  
+                        <Col md={3}>
+                        <Card>   
+                            <CardBody style={{border: "solid 1px green", borderRadius: "5px"}} className="p-3">
+                                <CardTitle><h4>Insurances</h4></CardTitle>
+                                <CardSubtitle style={{color: "rgb(61, 53, 53)"}}> All your insurances payments.</CardSubtitle>
+                                <CardText className="my-2">
+                                    <Control.text           
+                                        name="insurances"
+                                        model=".insurances"
+                                        className="form-control"
+                                        placeholder="0.00$" 
+                                        validators={{
+                                            isNumber
+                                        }}     
                                     />
                                     <Errors
                                         className="text-danger"
-                                        model=".car"
+                                        model=".insurances"
                                         show="touched"
                                         component="div"
                                         messages={{
                                             isNumber: 'Must be a number'      
                                         }}
                                     />
-                                    <DatePicker
-                                    model=".carBillDate"
-                                    name="carBillDate"
-                                    selected={ this.state.carBillDate }
-                                    onChange={ this.handleChangeCarBillDate }
-                                    name="carBillDate"
-                                    dateFormat="MM-dd-yyyy"
-                                    calendarWeeks={true}
-                                    placeholderText="Select a date "
-                                />                    
-                                    </div>: <div />}  
-                            </Col>
-                            <Col md={3}>
-                                <Label htmlFor="rent" onClick={this.revealInput} className="billsLabel" id="rentLabel" />
-                                {this.state.rent ? <div><Control.text 
-                                    name="rent"
-                                    model=".rent"
-                                    className="form-control"
-                                    placeholder="0.00$" 
-                                        validators={{
-                                        isNumber
-                                }}     
-                                    />
-                                    <Errors
-                                    className="text-danger"
-                                    model=".rent"
-                                    show="touched"
-                                    component="div"
-                                    messages={{
-                                        isNumber: 'Must be a number'
-                                    
-                                    }}
-                                    />
-                                    <DatePicker
-                                    model=".rentBillDate"
-                                    name="rentBillDate"
-                                    selected={ this.state.rentBillDate }
-                                    onChange={ this.handleChangeRentBillDate }
-                                    name="rentBillDate"
-                                    dateFormat="MM-dd-yyyy"
-                                    calendarWeeks={true}
-                                    placeholderText="Select a date"
-                                />                 
-                                    </div>: <div />}
-                            </Col>
-                            <Col md={3}>
-                                <Label htmlFor="phone" onClick={this.revealInput} className="billsLabel" id="phoneLabel"/>
-                                {this.state.phone ? <div><Control.text 
-                                    name="phone"
-                                    model=".phone"
-                                    className="form-control"
-                                    placeholder="0.00$"    
-                                    validators={{
-                                        isNumber
-                                }}     
-                                    />
-                                    <Errors
-                                    className="text-danger"
-                                    model=".phone"
-                                    show="touched"
-                                    component="div"
-                                    messages={{
-                                        isNumber: 'Must be a number'
-                                    
-                                    }}
-                                    />
-                                    </div>: <div />}     
-                            </Col>
+                                    <div className="customDatePickerWidth">
+                                        <CardSubtitle style={{color: "rgb(61, 53, 53)"}} className="mt-2 mb-3">First of every month </CardSubtitle>
+                                    </div>                
+                                </CardText>
+                            </CardBody>
+                        </Card>
+                    </Col>    
                            
-                            <Col md={3}>
-                                <Label htmlFor="misc" onClick={this.revealInput} className="billsLabel" id="miscLabel" />
-                                {this.state.misc ? <div><Control.text 
-                                    name="misc"
-                                    model=".misc"
-                                    className="form-control"
-                                    placeholder="0.00$"  
-                                    validators={{
-                                        isNumber
-                                }}     
-                                    />
-                                    <Errors
-                                    className="text-danger"
-                                    model=".misc"
-                                    show="touched"
-                                    component="div"
-                                    messages={{
-                                        isNumber: 'Must be a number'
-                                    
-                                    }}
-                                    />
-                                    </div>: <div />}     
-                            </Col>
-                        </Row>
-                        <Row className="form-group">
-                                    <Col className="col-3 col-md-1 " >                             
-                                        <Button className="text-white" type="submit"  style={{background: " #1CB5E0",border: "none",color: "white !important "}} color="primary" disabled={false}>
-                                            Submit
-                                        </Button>
-                                    </Col>  
-                                    <Link to='/income'> 
-                                    <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
-                                        back
-                                    </Button>
-                                </Link>
-                                <Link to='/savings'> 
-                                <Button className="" color="secondary" style={{background: "black"}} disabled={false}>
-                                    Next
+          
+                   
+                    </Row>
+                        <Row className="form-group ml-1">                         
+                            <Link to='/addIncome'> 
+                                <Button className="col" color="secondary" style={{background: "black"}} disabled={false}>
+                                back
+                                </Button>
+                            </Link>
+                            <Link to='/addSavings'> 
+                                <Button className="col" color="secondary" style={{background: "black"}} disabled={false}>
+                                Next
                                 </Button>
                             </Link>                   
+                                <Button className="text-white offset-6 offset-md-9" type="submit"  style={{background: " #1CB5E0",border: "none",color: "white !important "}} color="primary" disabled={false}>
+                                    Confirm
+                                </Button>
                         </Row>
                     </LocalForm>
                 </div>
                 <div className="container mb-5">
-                    <h1>drop down</h1>
-                    <p>{this.state.billsName.car}
-                    </p>
-                    <table>
-                        <tr>
-                            {billNames} 
-                        </tr>
-                        <tr>
-                            {billValues}
-                        </tr>
-                    </table>   
+                    <div>
+                        {this.state.billsName.length >= 1 ? <h3>Your bills</h3>: <div />}
+                        <table className="table table-striped">
+                            <thead>
+                                <tr>
+                                    {billNames} 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {billValues}
+                                </tr>
+                                <tr>
+                                    {billDates}
+                                </tr>
+                            </tbody>            
+                        </table>   
+                    </div>
                 </div>
             </div>
      
