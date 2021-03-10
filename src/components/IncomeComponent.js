@@ -30,7 +30,7 @@ class Income extends Component {
         const data = {income: values.income,cycle: values.cycle, payDay: day, payMonth: month}
 
         this.props.addIncome(data)
-        this.props.getNextPayDate(data)
+        // this.props.getNextPayDate(data)
         // this.props.history.push("/home");
         this.setState({
             nextBtn: false,
@@ -129,7 +129,7 @@ class Income extends Component {
                                 Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
                             </Button>
                         </Link>
-                            <Button className="text-white" type="submit"  style={{backgroundColor: "darkblue",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
+                            <Button className="text-white" type="submit"  style={{backgroundColor: "green",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
                                 Confirm
                             </Button>
                                                     

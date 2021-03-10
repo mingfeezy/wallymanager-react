@@ -51,24 +51,32 @@ export const deleteSavings = ({id} = {}) => ({
 export const addBills = ({
     car= 0,
     rent= 0,
-    phone= 0,
-    misc =0,
+    insurances = 0,
+    wireless,
     dayCar = null,
     monthCar =null,
     dayRent = null,
-    monthRent = null
+    monthRent = null,
+    monthWireless = null,
+    dayWireless = null,
+    monthInsurances = 1,
+    dayInsurances = 3
 } = {}) => ({
     type:ActionTypes.ADD_BILLS,
     payload: {
         id:uuidv4(),
         car,
         rent,
-        phone,
-        misc,
+        insurances,
+        wireless,
         dayCar,
         monthCar,
         dayRent,
-        monthRent
+        monthRent,
+        monthWireless,
+        dayWireless,
+        monthInsurances,
+        dayInsurances
     
     }
 })
@@ -90,7 +98,8 @@ export const addIncome = ({
         date    
     }
 })
-export function getNextPayDate ({income, cycle, payDay, payMonth}) {
+export function getNextPayDate (income, cycle, payDay, payMonth) {
+    
     if (+payDay + +cycle >= 30) {
         return (
             {
@@ -107,13 +116,49 @@ export function getNextPayDate ({income, cycle, payDay, payMonth}) {
         {
             type: ActionTypes.ADD_NEXT_PAY_DATE,
             payload: {
-                payMonth:+payMonth,
+                payMonth:+payMonth + 1,
                 payDay:+payDay + +cycle,
                 income: +income,
                 cycle: +cycle
             }
         }
     )
+}
+function checkCycle(cycle) {
+
+    switch (+cycle) {
+        case 7:
+            return 'Weekly';
+        case 15:
+            return 'Bi weekly'
+        default:
+            return 'Monthly'
+    }
+}
+export function getBalance(bills, income, cycle, payDay, savings) {
+    console.log(savings)
+    console.log(income)
+    console.log(payDay)
+    console.log(bills.bills.rent)
+    console.log(bills.bills.car)
+    console.log(bills.bills.wireless)
+    console.log(bills.bills.insurances)
+    let totalBill = parseFloat(bills.bills.rent) + parseFloat(bills.bills.car) + parseFloat(bills.bills.insurances) + parseFloat(bills.bills.wireless);
+    let totalDeduction = parseFloat(totalBill) + parseFloat(savings)
+    if (bills.bills.dayCar < payDay && bills.bills.dayRent < payDay && bills.bills.dayWireless < payDay && savings) {
+        
+        console.log(parseFloat(totalBill))
+        console.log(parseFloat(income) - parseFloat(totalBill))
+        return ({
+            type: ActionTypes.GET_BALANCE,
+            payload: {balance: income - totalDeduction, cycle: checkCycle(cycle), totalBill: totalBill, totalDeduction: totalDeduction}
+        })
+        } else {
+            return ({
+                type: ActionTypes.GET_BALANCE,
+            payload: {balance: income, cycle: checkCycle(cycle)}
+            })
+        }
 }
 
 export const updateIncome = (id, incomeItem) => ({

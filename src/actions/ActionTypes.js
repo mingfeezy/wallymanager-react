@@ -6,4 +6,5 @@ export const ADD_SAVINGS = 'ADD_SAVINGS';
 export const UPDATE_SAVINGS = 'UPDATE_SAVINGS';
 export const DELETE_SAVINGS = 'DELETE_SAVINGS';
 export const ADD_BILLS = 'ADD_BILLS';
-export const ADD_NEXT_PAY_DATE = 'ADD_NEXT_PAY_DATE'
+export const ADD_NEXT_PAY_DATE = 'ADD_NEXT_PAY_DATE';
+export const GET_BALANCE = 'GET_BALANCE';

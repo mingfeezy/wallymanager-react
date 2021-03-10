@@ -158,7 +158,7 @@ class Profile extends Component {
                                             Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
                                         </Button>
                                     </Link>
-                                    <Button className="text-white" type="submit" style={{backgroundColor: "darkblue",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
+                                    <Button className="text-white" type="submit" style={{backgroundColor: "green",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
                                         Confirm
                                     </Button>
                                 </Row>

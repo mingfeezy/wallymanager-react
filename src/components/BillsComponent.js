@@ -8,9 +8,11 @@ import { Row, Col, Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { addBills } from '../actions/ActionCreators'
+import { getNextPayDate } from '../actions/ActionCreators'
+
 import { NavLink, Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-
+import moment from 'moment';
 
 
 const isNumber = val => !isNaN(+val);
@@ -29,6 +31,8 @@ const isNumber = val => !isNaN(+val);
              rentBillDay: null,
              wirelessBillDate: null,
              wirelessBillDay: null,
+             insurancesBillDay: 1,
+        
              billsName: [],
              billsValues: [],
              billsDates: [],
@@ -46,13 +50,18 @@ const isNumber = val => !isNaN(+val);
         this.setState({[input]: !this.state[input]})
     }
     handelSubmit(values) {
+
         const dayCar = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.carBillDate);
         const monthCar = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.carBillDate);
         const dayRent = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.rentBillDate);
         const monthRent = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.rentBillDate);
-        const data = {...values, dayCar: dayCar,monthCar: monthCar,dayRent: dayRent,monthRent: monthRent}
+        const dayWireless = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.wirelessBillDate);
+        const monthWireless = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.wirelessBillDate);
+        const data = {...values, dayCar: dayCar,monthCar: monthCar,dayRent: dayRent,monthRent: monthRent, monthWireless: monthWireless, dayWireless: dayWireless}
         console.log(values)
+        console.log(data)
         this.props.addBills(data);
+        this.props.getNextPayDate(this.props.income[0].income, this.props.income[0].cycle, this.props.income[0].payDay, this.props.income[0].payMonth)
         this.setState({
             nextBtn: false,
             nextBtnColor: 'darkblue'
@@ -65,30 +74,32 @@ const isNumber = val => !isNaN(+val);
             billsValues: Object.values(values)
         })
     }
-    
-    handleChangeBillDate(date) {
-        if (this.state.billsDates.length === 3) {
-            this.setState({
-                billsDates: [...this.state.billsDates, new Intl.DateTimeFormat('en', { day: '2-digit', month: '2-digit' }).format(date), '03/01']
-            })
-        }
+//   MAKE IT AWAIT INSTEAD OF 3 FNS
+     handleChangeBillDate(date, e ) {
+         let target = e.target.name
         this.setState({
-            billsDates: [...this.state.billsDates, new Intl.DateTimeFormat('en', { day: '2-digit', month: '2-digit' }).format(date)]
+            target: date
         })
-     
-      }
+    }
+    handleCarBillDate = (date) => 
+        this.setState({carBillDate: date})
+    handleRentBillDate = (date) => 
+        this.setState({rentBillDate: date})
+    handleWirelessBillDate = (date) => 
+        this.setState({wirelessBillDate: date})
+    
     disableBtn = (e) => {
         e.target.disabled = true
     }
     render() {
         const billNames = this.state.billsName.map((bill, i) => {
-            console.log(bill)
+            // console.log(bill)
             return (            
                      <th key={i}>{bill}</th>         
             )
         });
         const billValues = this.state.billsValues.map((value, i) => {
-            console.log(value)
+            // console.log(value)
             return ( <td key={i}>{value}</td>)            
         });
         const billDates = this.state.billsDates.map((date,i) => {
@@ -133,14 +144,14 @@ const isNumber = val => !isNaN(+val);
                                             <div className="customDatePickerWidthInput customDatePickerWidth">
                                                 <DatePicker
                                                     
-                                                    wrapperClassName="datePicker"
+                                                    // wrapperClassName="datePicker"
                                                     className="form-control borderPicker"
                                                     model=".carBillDate"
                                                     name="carBillDate"
-                                                    selected={ this.state.carBillDate }
-                                                    onChange={ this.handleChangeBillDate }
+                                                    // selected={ this.state.carBillDate }
+                                                    onChange={this.handleCarBillDate}
                                                     name="carBillDate"
-                                                    dateFormat="MM-dd-yyyy"
+                                                    dateFormat= "MM-dd-yyyy"
                                                     calendarWeeks={true}
                                                     placeholderText="Select a date "
                                                 />    
@@ -183,7 +194,7 @@ const isNumber = val => !isNaN(+val);
                                                 model=".rentBillDate"
                                                 name="rentBillDate"
                                                 selected={ this.state.rentBillDate }
-                                                onChange={ this.handleChangeBillDate }
+                                                onChange={ this.handleRentBillDate }
                                                 name="rentBillDate"
                                                 dateFormat="MM-dd-yyyy"
                                                 calendarWeeks={true}
@@ -229,7 +240,7 @@ const isNumber = val => !isNaN(+val);
                                                 model=".wirelessBillDate"
                                                 name="wirelessBillDate"
                                                 selected={ this.state.wirelessBillDate }
-                                                onChange={ this.handleChangeBillDate }
+                                                onChange={ this.handleWirelessBillDate }
                                                 name="wirelessBillDate"
                                                 dateFormat="MM-dd-yyyy"
                                                 calendarWeeks={true}
@@ -287,7 +298,7 @@ const isNumber = val => !isNaN(+val);
                                 Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
                             </Button>
                         </Link>                   
-                            <Button className="text-white" type="submit"  style={{backgroundColor: "darkblue",border: "none",color: "white !important "}} color="primary" disabled={false}>
+                            <Button className="text-white" type="submit"  style={{backgroundColor: "green",border: "none",color: "white !important "}} color="primary" disabled={false}>
                                 Confirm
                             </Button>
                     </Row>
@@ -321,8 +332,9 @@ const isNumber = val => !isNaN(+val);
 
 }
 
-const mapStateToProps = state => ({ bills: state.bills })
+const mapStateToProps = state => ({ bills: state.bills, income: state.income })
 const mapDispatchToProps = {
-    addBills
+    addBills,
+    getNextPayDate
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Bills));

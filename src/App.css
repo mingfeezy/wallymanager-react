@@ -79,3 +79,12 @@
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.editBtn {
+  background: none;
+  border: none;
+}
+.custom-amount-box {
+  border: solid 1px darkblue;
+  border-radius: 5px;
+}
+

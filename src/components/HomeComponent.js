@@ -22,7 +22,7 @@ class Home extends Component {
                 <div className="row form-starter-box mx-auto mt-5">
                         <h3 className="col-8 col-md-4 my-auto offset-md-3 offset-1">Let's get you started!</h3>
                         <Link to='/profile'>
-                            <i className="fa fa-3x fa-arrow-right my-auto" style={{color: "darkblue"}} />
+                            <i className="fa fa-3x fa-arrow-right my-auto" style={{color: "green"}} />
                         </Link>
                 </div>
             </div>
