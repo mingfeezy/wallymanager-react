@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-social/bootstrap-social.css';
 import 'font-awesome/css/font-awesome.css';
 import "react-datepicker/dist/react-datepicker.css";
+import '@fortawesome/fontawesome-free/css/all.min.css'
+
 
 ReactDOM.render(
   <React.StrictMode>

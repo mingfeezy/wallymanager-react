@@ -1,17 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import { deleteIncome } from '../actions/ActionCreators';
+import { deleteIncome, sortByIncomeAscending, sortByIncomeDescending, sortByDateAscending, sortByDateDescending } from '../actions/ActionCreators';
 import IncomeListItem from './IncomeListItem';
 import selectIncome from '../selectors/income';
 
 const IncomeList = (props) => {
+    const [incomeToggle, setIncomeToggle] = useState(true);
+
+    const toggleIncome = (e) => {
+
+        //if true sort descending
+        if(incomeToggle) {
+            props.sortByIncomeDescending();
+        }
+        //ascending
+        else {
+            props.sortByIncomeAscending();
+        }
+
+        setIncomeToggle(!incomeToggle);
+
+    
+    }
+
     return (
         <div>
         <div className='container my-5' style={{fontSize:"20px"}} >
             <h2>Income</h2>
             <div className="row col-12 mx-auto" >
                 <div className='col-2'>
-                    <div>Income</div>
+                    <div>Income <i onClick={toggleIncome} class={`fa ${
+                        incomeToggle ? 'fa-chevron-down' : 'fa-chevron-up'
+                    }`}></i></div>
+                    
                 </div>
                 <div className='col-2'>
                     <div>Cycle</div>
@@ -50,7 +71,11 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    deleteIncome: (id) => deleteIncome(id)
+    deleteIncome: (id) => deleteIncome(id),
+    sortByIncomeAscending, 
+    sortByIncomeDescending, 
+    sortByDateAscending, 
+    sortByDateDescending
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(IncomeList);

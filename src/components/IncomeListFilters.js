@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sortByIncomeAscending, sortByIncomeDescending, sortByDateAscending, sortByDateDescending} from '../actions/ActionCreators';
 
+
 const AMOUNT_ASCENDING = "0";
 const AMOUNT_DESCENDING = "1";
 const DATE_ASCENDING = "2";
