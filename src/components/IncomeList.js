@@ -6,10 +6,11 @@ import selectIncome from '../selectors/income';
 
 const IncomeList = (props) => {
     const [incomeToggle, setIncomeToggle] = useState(true);
+    const [dateToggle, setDateToggle] = useState(true);
 
-    const toggleIncome = (e) => {
+    const toggleIncomeSort = (e) => {
 
-        //if true sort descending
+        //descending
         if(incomeToggle) {
             props.sortByIncomeDescending();
         }
@@ -17,10 +18,20 @@ const IncomeList = (props) => {
         else {
             props.sortByIncomeAscending();
         }
-
         setIncomeToggle(!incomeToggle);
+    }
 
-    
+    const toggleDateSort = (e) => {
+
+        //descending
+        if(dateToggle) {
+            props.sortByDateDescending();
+        }
+        //ascending
+        else {
+            props.sortByDateAscending();
+        }
+        setDateToggle(!dateToggle);
     }
 
     return (
@@ -29,10 +40,9 @@ const IncomeList = (props) => {
             <h2>Income</h2>
             <div className="row col-12 mx-auto" >
                 <div className='col-2'>
-                    <div>Income <i onClick={toggleIncome} class={`fa ${
+                    <div>Income <i onClick={toggleIncomeSort} class={`fa ${
                         incomeToggle ? 'fa-chevron-down' : 'fa-chevron-up'
                     }`}></i></div>
-                    
                 </div>
                 <div className='col-2'>
                     <div>Cycle</div>
@@ -44,7 +54,9 @@ const IncomeList = (props) => {
                     <div>Pay Month</div>
                 </div>
                 <div className='col-2'>
-                    <div>Date</div>
+                <div>Date <i onClick={toggleDateSort} class={`fa ${
+                        incomeToggle ? 'fa-chevron-down' : 'fa-chevron-up'
+                    }`}></i></div>
                 </div>
             </div>
         </div>
