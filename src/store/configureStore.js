@@ -3,6 +3,7 @@ import BillsReducer from '../reducers/bills';
 import IncomeReducer from '../reducers/income';
 import ProfileReducer from '../reducers/profile';
 import SavingsReducer from '../reducers/savings';
+import FiltersReducer from '../reducers/filters';
 import ManagementReducer from '../reducers/management';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -15,7 +16,8 @@ export default () => {
             income: IncomeReducer,
             profile: ProfileReducer,
             savings: SavingsReducer,
-            management: ManagementReducer
+            management: ManagementReducer,
+            filters:FiltersReducer
         }), 
             composeEnhancer(applyMiddleware(thunk))
 

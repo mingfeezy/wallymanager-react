@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import { withRouter } from 'react-router-dom';
 import { NavLink, Link } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
+import moment from 'moment';
 
 
 class IncomeForm extends Component {
@@ -20,13 +21,12 @@ class IncomeForm extends Component {
         const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.startDate);
         const year = new Intl.DateTimeFormat('en', { year: '2-digit' }).format(this.state.startDate);
         const date = `${month}-${day}-${year}`;
-        const data = {...values, payDay: day, payMonth: month, date:date};
+        const data = {...values, payDay: day, payMonth: month, date:moment(date).valueOf()};
         this.props.onSubmit(data);
         this.props.history.push("/dashboard");
     }
 
     handleChange = (date) => {
-        console.log(date);
         this.setState({
           startDate: date
         })

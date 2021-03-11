@@ -2,10 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteIncome } from '../actions/ActionCreators';
 import IncomeListItem from './IncomeListItem';
-
+import selectIncome from '../selectors/income';
 
 const IncomeList = (props) => {
-
     return (
         <div>
         <div className='container my-5' style={{fontSize:"20px"}} >
@@ -43,9 +42,10 @@ const IncomeList = (props) => {
     ); 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        income: state.income
+        income: selectIncome(state.income, state.filters),
+        filters: state.filters
     }
 }
 

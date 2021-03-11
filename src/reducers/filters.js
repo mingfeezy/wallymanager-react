@@ -1,42 +1,37 @@
-/*
-import moment from 'moment';
+
+//import moment from 'moment';
 
 const filtersReducerDefaultState = {
-    text:'',
-    sortBy:'amount',
-    startDate:moment().startOf('month'),
-    endDate:moment().endOf('month')
+    sortBy:'amount-ascending'
 };
 
-export default (state = filtersReducerDefaultState, action) => {
+const FiltersReducer = (state = filtersReducerDefaultState, action) => {
+    console.log('right reducer');
     switch(action.type) {
-        case "SET_TEXT_FITLER": 
+        case "SORT_BY_INCOME_ASCENDING": 
             return {
                 ...state,
-                text: action.text
+                sortBy:'amount-ascending',
             }
-        case "SORT_BY_AMOUNT": 
+        case "SORT_BY_INCOME_DESCENDING": 
             return {
                 ...state,
-                sortBy:'amount',
+                sortBy:'amount-descending',
             }
-        case "SORT_BY_DATE": 
+        case "SORT_BY_DATE_ASCENDING": 
             return {
                 ...state,
-                sortBy:'date',
+                sortBy:'date-ascending',
             }
-        case "SET_START_DATE": 
+        case "SORT_BY_DATE_DESCENDING": 
             return {
                 ...state,
-                startDate:action.startDate,
+                sortBy:'date-descending',
             }
-        case "SET_END_DATE": 
-            return {
-                ...state,
-                endDate:action.endDate,
-            }
+       
         default:
             return state;
     }
 }
-*/
+
+export default FiltersReducer;
