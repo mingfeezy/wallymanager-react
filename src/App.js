@@ -3,7 +3,7 @@ import './App.css';
 import AppRouter from './routers/AppRouter'
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { addIncome } from './actions/ActionCreators';
+import { addIncome, addSavings} from './actions/ActionCreators';
 import moment from 'moment';
 
 function App() {
@@ -24,6 +24,21 @@ store.dispatch(addIncome({
     payMonth: 0,
     date: moment('05-24-2020').valueOf()
 }));
+
+store.dispatch(addSavings({
+    description:'test', 
+    amount:1000,
+    frequency: 1,
+    enable: true
+}));
+
+store.dispatch(addSavings({
+  description:'test1', 
+  amount:2000,
+  frequency: 3,
+  enable: true
+}));
+
 
   return (
     <Provider store={store}>

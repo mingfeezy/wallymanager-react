@@ -190,4 +190,21 @@ export const sortByDateDescending = () => ({
     type: 'SORT_BY_DATE_DESCENDING'
 });
 
+export const sortBySavingsAmountAscending = () => ({
+    type: 'SORT_BY_SAVINGS_AMOUNT_ASCENDING'
+});
+
+export const sortBySavingsAmountDescending = () => ({
+    type: 'SORT_BY_SAVINGS_AMOUNT_DESCENDING'
+});
+
+export const sortBySavingsDescriptionAscending = () => ({
+    type: 'SORT_BY_SAVINGS_DESCRIPTION_ASCENDING'
+});
+
+export const sortBySavingsDescriptionDescending = () => ({
+    type: 'SORT_BY_SAVINGS_DESCRIPTION_DESCENDING'
+});
+
+
 

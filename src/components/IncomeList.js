@@ -55,7 +55,7 @@ const IncomeList = (props) => {
                 </div>
                 <div className='col-2'>
                 <div>Date <i onClick={toggleDateSort} class={`fa ${
-                        incomeToggle ? 'fa-chevron-down' : 'fa-chevron-up'
+                        dateToggle ? 'fa-chevron-down' : 'fa-chevron-up'
                     }`}></i></div>
                 </div>
             </div>
@@ -78,7 +78,7 @@ const IncomeList = (props) => {
 const mapStateToProps = state => {
     return {
         income: selectIncome(state.income, state.filters),
-        filters: state.filters
+        //filters: state.filters
     }
 }
 
