@@ -200,3 +200,37 @@ export const deleteIncome = ({id}) => ({
     id
 });
 
+export const sortByIncomeAscending = () => ({
+    type: 'SORT_BY_INCOME_ASCENDING'
+});
+
+export const sortByIncomeDescending = () => ({
+    type: 'SORT_BY_INCOME_DESCENDING'
+});
+
+export const sortByDateAscending = () => ({
+    type: 'SORT_BY_DATE_ASCENDING'
+});
+
+export const sortByDateDescending = () => ({
+    type: 'SORT_BY_DATE_DESCENDING'
+});
+
+export const sortBySavingsAmountAscending = () => ({
+    type: 'SORT_BY_SAVINGS_AMOUNT_ASCENDING'
+});
+
+export const sortBySavingsAmountDescending = () => ({
+    type: 'SORT_BY_SAVINGS_AMOUNT_DESCENDING'
+});
+
+export const sortBySavingsDescriptionAscending = () => ({
+    type: 'SORT_BY_SAVINGS_DESCRIPTION_ASCENDING'
+});
+
+export const sortBySavingsDescriptionDescending = () => ({
+    type: 'SORT_BY_SAVINGS_DESCRIPTION_DESCENDING'
+});
+
+
+

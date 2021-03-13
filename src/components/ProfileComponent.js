@@ -34,6 +34,8 @@ class Profile extends Component {
 
     render() {
         return (
+            <>
+            <h1>Profile</h1>
             <div className="container mt-5">
                 <div className="container">
                     <LocalForm name="Account form" onSubmit={values => this.handleSubmit(values)}>
@@ -160,8 +162,10 @@ class Profile extends Component {
                             </LocalForm>
                     </div>
                 </div>
+            </>                                
         )
     }
+                                            
 }
 
 const mapStateToProps = state =>({ profile: state.profile })

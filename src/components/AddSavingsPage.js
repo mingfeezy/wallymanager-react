@@ -12,13 +12,7 @@ const mapDispatchToProps = {
     addSavings
 }
 class AddSavingsPage extends Component {
-    constructor(props) {
-        super(props)
-        
-    }
-componentWillUnmount() {
     
-}
 handleSubmit(saving) {
     console.log(saving)
     this.props.addSavings(saving);
