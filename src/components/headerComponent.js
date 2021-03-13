@@ -14,9 +14,6 @@ class Header extends Component {
         return (
             <div>
             <React.Fragment>
-            <Jumbotron fluid>
-       
-            </Jumbotron>
 
             <Navbar light sticky="top" expand="md">
                 <div className="container">
@@ -24,37 +21,37 @@ class Header extends Component {
                     <Collapse isOpen={this.state.isNavOpen} navbar>
                         <Nav navbar>
                             <NavItem>
-                                <NavLink className="nav-link" to="/home">
+                                <NavLink className="nav-link text-white" to="/home">
                                     <i className="fa fa-home fa-lg" /> Home
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/bills">
+                                <NavLink className="nav-link text-white" to="/bills">
                                     <i className="fa fa-list fa-lg" /> Bills
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/Income">
+                                <NavLink className="nav-link text-white" to="/Income">
                                     <i className="fa fa-list fa-lg" /> Income
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/addSavings">
+                                <NavLink className="nav-link text-white" to="/addSavings">
                                     <i className="fa fa-list fa-lg" /> Savings
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/profile">
+                                <NavLink className="nav-link text-white" to="/profile">
                                     <i className="fa fa-list fa-lg" /> Profile 
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/dashboard">
+                                <NavLink className="nav-link text-white" to="/dashboard">
                                     <i className="fa fa-list fa-lg" /> Dashboard 
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/manager">
+                                <NavLink className="nav-link text-white" to="/manager">
                                     <i className="fa fa-list fa-lg" /> Manager //
                                 </NavLink>
                             </NavItem>

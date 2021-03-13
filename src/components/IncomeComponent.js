@@ -36,7 +36,11 @@ class Income extends Component {
             nextBtn: false,
             nextBtnColor: 'darkblue'
         })
+        this.props.history.push('/bills')
 
+    }
+    componentDidMount() {
+        console.log('asba')
     }
     handleChange(date) {
         this.setState({
@@ -51,7 +55,7 @@ class Income extends Component {
     render() {
         return (
         
-                <LocalForm name="incomeForm" className="container mt-5" onSubmit={(values) => this.handleSubmit(values)}>
+                <LocalForm name="incomeForm" className="container custom-margin" onSubmit={(values) => this.handleSubmit(values)}>
                     <Row className="form-group">
                         <Col md={4}>
                             <Label htmlFor="income">
@@ -117,21 +121,19 @@ class Income extends Component {
                         </Col>
         
                     </Row>
-                    <Row className="offset-md-9 offset-5 mt-5">  
+                    <Row className="offset-md-10 offset-5 mt-5">  
                     
                         <Link to='/home'> 
-                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'darkblue'}} disabled={false}>
-                                <i className="fa fa-arrow-left" style={{color: 'darkblue'}} /> back
+                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'whitesmoke'}}>
+                                <i className="fa fa-arrow-left mr-1" style={{color: 'cyan'}} /> back
                             </Button>
                         </Link>
-                        <Link to='/bills'> 
-                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: this.state.nextBtnColor}} disabled={this.state.nextBtn}>
-                                Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
+                   
+                            <Button className="col" color="secondary" type="submit" style={{background: 'none', border: 'none', color: 'whitesmoke'}}>
+                                Next <i className="fa fa-arrow-right ml-1" style={{color: 'cyan'}} />
                             </Button>
-                        </Link>
-                            <Button className="text-white" type="submit"  style={{backgroundColor: "green",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
-                                Confirm
-                            </Button>
+              
+                       
                                                     
                     </Row>
                 </LocalForm>

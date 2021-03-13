@@ -135,28 +135,54 @@ function checkCycle(cycle) {
             return 'Monthly'
     }
 }
+function checkBillsCycle(incomecycle, carCycle, rentCycle, wirelesscycle, car, rent, wireless) {
+    console.log(incomecycle)
+  
+    // let bills = {amountCar: car, amountRent: rent, amountWireless: wireless}
+    let bills = {amountCar: car, amountRent: rent, amountWireless: wireless}
+    switch (incomecycle) {
+        case incomecycle < carCycle:
+            
+            bills.amountCar = 0
+            return bills
+        case incomecycle < rentCycle:
+            return bills = {...bills, amountRent: 0};
+        case incomecycle < wirelesscycle:
+            return bills = {...bills, amountWireless: 0}
+        default:
+            return bills
+    }
+    
+}
 export function getBalance(bills, income, cycle, payDay, savings) {
-    console.log(savings)
     console.log(income)
-    console.log(payDay)
-    console.log(bills.bills.rent)
-    console.log(bills.bills.car)
-    console.log(bills.bills.wireless)
-    console.log(bills.bills.insurances)
+    console.log(savings)
+    let allBills = checkBillsCycle(cycle, +bills.bills.dayCar, +bills.bills.dayRent, +bills.bills.dayWireless, bills.bills.car, bills.bills.rent, bills.bills.wireless)
+    console.log(allBills)
+    // console.log(savings)
+    // console.log(income)
+    // console.log(payDay)
+    // console.log(bills.bills.rent)
+    // console.log(bills.bills.car)
+    // console.log(bills.bills.wireless)
+    // console.log(bills.bills.insurances)
     let totalBill = parseFloat(bills.bills.rent) + parseFloat(bills.bills.car) + parseFloat(bills.bills.insurances) + parseFloat(bills.bills.wireless);
     let totalDeduction = parseFloat(totalBill) + parseFloat(savings)
+    console.log(totalBill)
+    console.log(totalDeduction)
+    console.log(income)
     if (bills.bills.dayCar < payDay && bills.bills.dayRent < payDay && bills.bills.dayWireless < payDay && savings) {
         
         console.log(parseFloat(totalBill))
-        console.log(parseFloat(income) - parseFloat(totalBill))
+        console.log(parseFloat(income) - parseFloat(totalDeduction))
         return ({
             type: ActionTypes.GET_BALANCE,
             payload: {balance: income - totalDeduction, cycle: checkCycle(cycle), totalBill: totalBill, totalDeduction: totalDeduction}
         })
-        } else {
+        } else if (!savings) {
             return ({
                 type: ActionTypes.GET_BALANCE,
-            payload: {balance: income, cycle: checkCycle(cycle)}
+            payload: {balance: income - totalBill, cycle: checkCycle(cycle), totalBill: totalBill, totalDeduction: totalDeduction}
             })
         }
 }

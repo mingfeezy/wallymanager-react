@@ -2,6 +2,8 @@ import React from 'react';
 import IncomeForm from './IncomeForm';
 import { connect } from 'react-redux';
 import { updateIncome } from '../actions/ActionCreators';
+import { getNextPayDate } from '../actions/ActionCreators'
+import { getBalance }from '../actions/ActionCreators'
 
 const UpdateIncomePage = (props) => (
     <div>
@@ -10,6 +12,7 @@ const UpdateIncomePage = (props) => (
             incomeItem={props.incomeItem}
             onSubmit={(incomeItem)=>{
                 props.dispatch(updateIncome(props.incomeItem.id, incomeItem));
+                props.dispatch(getBalance(props.bills, props.income[0].income, props.income[0].cycle, props.management.payDay, props.savings[0].amount))
                 props.history.push('/dashboard');
         }}/>
     </div>
@@ -18,7 +21,8 @@ const UpdateIncomePage = (props) => (
 
 const mapStateToProps = (state, props) => {
     return {
-        incomeItem: state.income.find((incomeItem)=>incomeItem.id === props.match.params.id)
+        incomeItem: state.income.find((incomeItem)=>incomeItem.id === props.match.params.id),
+        bills: state.bills, savings: state.savings, income: state.income, management: state.management
     }
 }
 

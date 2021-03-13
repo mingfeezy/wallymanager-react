@@ -66,6 +66,9 @@ const isNumber = val => !isNaN(+val);
             nextBtn: false,
             nextBtnColor: 'darkblue'
         })
+        this.props.history.push('/addSavings')
+    
+        
     }
     handleFormChanges(values) {
         
@@ -112,18 +115,18 @@ const isNumber = val => !isNaN(+val);
         return (
             <div>
 
-                <div className="container mt-5">
+                <div className="container custom-margin">
                     <LocalForm name="billsform" onSubmit={values => this.handelSubmit(values)} onChange={values => this.handleFormChanges(values)}>
                         <Row className="form-group">
                             
                             <Col md={3}>
-                                <Card>   
-                                    <CardBody style={{border: "solid 1px darkblue", borderRadius: "5px"}} className="p-3">
+                                <Card style={{background: 'none', color: 'white', border: 'solid 2px cyan', borderRadius: '10px'}}>   
+                                    <CardBody className="p-3">
                                         <CardTitle><h4>Car</h4></CardTitle>
-                                        <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your car note monthly amount</CardSubtitle>
-                                        <CardText className="my-2">
+                                        <CardSubtitle style={{color: "chartreuse"}}>Your car note monthly amount</CardSubtitle>
+                                        <CardText className="my-3">
                                             <Control.text   
-                                                style={{border: "solid 1px darkblue", borderRadius: "5px"}}         
+                                                style={{border: "solid 1px darkblue", borderRadius: "10px"}}         
                                                 name="car"
                                                 model=".car"
                                                 className="form-control"
@@ -148,7 +151,7 @@ const isNumber = val => !isNaN(+val);
                                                     className="form-control borderPicker"
                                                     model=".carBillDate"
                                                     name="carBillDate"
-                                                    // selected={ this.state.carBillDate }
+                                                    selected={ this.state.carBillDate }
                                                     onChange={this.handleCarBillDate}
                                                     name="carBillDate"
                                                     dateFormat= "MM-dd-yyyy"
@@ -162,11 +165,11 @@ const isNumber = val => !isNaN(+val);
                             </Col>
             
                             <Col md={3}>
-                            <Card>   
-                                <CardBody style={{border: "solid 1px darkblue", borderRadius: "5px"}} className="p-3">
+                            <Card style={{background: 'none', color: 'white', border: 'solid 2px cyan', borderRadius: '10px'}}>   
+                                <CardBody  className="p-3">
                                     <CardTitle><h4>Rent</h4></CardTitle>
-                                    <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your rent monthly payment</CardSubtitle>
-                                    <CardText className="my-2">
+                                    <CardSubtitle style={{color: "chartreuse"}}>Your rent monthly payment</CardSubtitle>
+                                    <CardText className="my-3">
                                         <Control.text  
                                             style={{border: "solid 1px darkblue", borderRadius: "5px"}}          
                                             name="rent"
@@ -207,11 +210,11 @@ const isNumber = val => !isNaN(+val);
                         </Col>
                             
                             <Col md={3}>
-                            <Card>   
-                                <CardBody style={{border: "solid 1px darkblue", borderRadius: "5px"}} className="p-3">
+                            <Card style={{background: 'none', color: 'white', border: 'solid 2px cyan', borderRadius: '10px'}}>   
+                                <CardBody  className="p-3">
                                     <CardTitle><h4>Wireless</h4></CardTitle>
-                                    <CardSubtitle style={{color: "rgb(61, 53, 53)"}}>Your phone monthly payment.</CardSubtitle>
-                                    <CardText className="my-2">
+                                    <CardSubtitle style={{color: "chartreuse"}}>Your phone monthly payment.</CardSubtitle>
+                                    <CardText className="my-3">
                                         <Control.text
                                             style={{border: "solid 1px darkblue", borderRadius: "5px"}}            
                                             name="wireless"
@@ -252,11 +255,11 @@ const isNumber = val => !isNaN(+val);
                             </Card>
                         </Col>  
                         <Col md={3}>
-                        <Card>   
-                            <CardBody style={{border: "solid 1px darkblue", borderRadius: "5px"}} className="p-3">
+                        <Card style={{background: 'none', color: 'white', border: 'solid 2px cyan', borderRadius: '10px'}}>   
+                            <CardBody  className="p-3">
                                 <CardTitle><h4>Insurances</h4></CardTitle>
-                                <CardSubtitle style={{color: "rgb(61, 53, 53)"}}> All your insurances payments.</CardSubtitle>
-                                <CardText className="my-2">
+                                <CardSubtitle style={{color: "chartreuse"}}> All your insurances payments.</CardSubtitle>
+                                <CardText className="my-4">
                                     <Control.text  
                                         style={{border: "solid 1px darkblue", borderRadius: "5px"}}         
                                         name="insurances"
@@ -277,7 +280,7 @@ const isNumber = val => !isNaN(+val);
                                         }}
                                     />
                                     <div>
-                                        <CardSubtitle style={{color: "rgb(61, 53, 53)"}} className="mt-2 mb-4">First of every month </CardSubtitle>
+                                        <CardSubtitle style={{color: "whitesmoke"}} className="mt-2 mb-4">First of every month </CardSubtitle>
                                     </div>                
                                 </CardText>
                             </CardBody>
@@ -287,20 +290,18 @@ const isNumber = val => !isNaN(+val);
           
                    
                     </Row>
-                    <Row className="offset-md-9 offset-5 mt-5">                         
+                    <Row className="offset-md-10 offset-5 mt-5">                         
                         <Link to='/addIncome'> 
-                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'darkblue'}} disabled={false}>
-                                <i className="fa fa-arrow-left" style={{color: 'darkblue'}} /> back
+                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'whitesmoke', }} disabled={false}>
+                                <i className="fa fa-arrow-left" style={{color: 'cyan'}} /> Back
                             </Button>
                         </Link>
-                        <Link to='/addSavings'> 
-                            <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: this.state.nextBtnColor}} disabled={this.state.nextBtn}>
-                                Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
+                       
+                            <Button className="col" color="secondary" type="submit" style={{background: 'none', border: 'none', color: 'whitesmoke', marginLeft: '-50px'}} >
+                                Next <i className="fa fa-arrow-right " style={{color: 'cyan'}} />
                             </Button>
-                        </Link>                   
-                            <Button className="text-white" type="submit"  style={{backgroundColor: "green",border: "none",color: "white !important "}} color="primary" disabled={false}>
-                                Confirm
-                            </Button>
+                                          
+                     
                     </Row>
               
                     </LocalForm>

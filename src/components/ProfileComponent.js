@@ -23,16 +23,13 @@ class Profile extends Component {
 
     handleSubmit = (values) => {
         this.props.addProfile(values);
-        // this.props.history.push("/home");
-        // values.target.disabled = true
         this.setState({
             nextBtn: false,
             nextBtnColor: 'darkblue'
         })
+        this.props.history.push('/income')
     }
-    // disableBtn = (e) => {
-    //     e.target.disabled = true
-    // }
+
 
 
     render() {
@@ -147,20 +144,18 @@ class Profile extends Component {
                                         />
                                     </Col>
                                 </Row>                    
-                                <Row className="offset-md-9 offset-5 mt-5"> 
+                                <Row className="offset-md-10 offset-5 mt-5"> 
                                     <Link to='/home'> 
-                                        <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'darkblue'}} disabled={false}>
-                                            <i className="fa fa-arrow-left" style={{color: 'darkblue'}} /> back
+                                        <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: 'whitesmoke'}}>
+                                            <i className="fa fa-arrow-left  mr-1" style={{color: 'cyan'}} /> Back
                                         </Button>
                                     </Link>    
-                                    <Link to='/income'> 
-                                        <Button className="col" color="secondary" style={{background: 'none', border: 'none', color: this.state.nextBtnColor}} disabled={this.state.nextBtn}>
-                                            Next <i className="fa fa-arrow-right" style={{color: this.state.nextBtnColor}} />
+                                    
+                                        <Button className="col direction-btn" color="secondary" type="submit" style={{background: 'none', border: 'none', color: 'whitesmoke'}}>
+                                            Next <i className="fa fa-arrow-right  ml-1" style={{color: 'cyan'}} />
                                         </Button>
-                                    </Link>
-                                    <Button className="text-white" type="submit" style={{backgroundColor: "green",border: "none",color: "white !important "}} color="primary" disabled={false} onClick={this.disableBtn}>
-                                        Confirm
-                                    </Button>
+               
+                                    
                                 </Row>
                             </LocalForm>
                     </div>

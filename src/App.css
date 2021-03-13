@@ -1,15 +1,34 @@
-/* body {
-  background: url(images/bg.jpg) no-repeat center center fixed; 
+body {
+  /* background: url(https://i.postimg.cc/Gtm5pPfW/pexels-ovan-57690.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
-} */
-.billsLabel {
+  background-size: cover; */
+  background: #000428;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  
 
-  /* -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover; */
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+  
+ 
+
+  color: white !important;
+  /* background: rgb(1, 7, 97) !important; */
+}
+.billsLabel {
   
   background-size: contain;
   /* padding: 33px; */
@@ -20,8 +39,6 @@
   color: black;
   border-radius: 5px;
   border: solid 1px yellowgreen;
-  /* box-shadow: 20px 50px; */
-
 }
 
 .billsLabel:hover {
@@ -84,7 +101,12 @@
   border: none;
 }
 .custom-amount-box {
-  border: solid 1px darkblue;
-  border-radius: 5px;
+  padding: 25px !important;
+  border: solid 1px cyan;
+  border-radius: 15px;
 }
+.custom-margin {
+  margin-top: 140px !important;
+}
+
 
