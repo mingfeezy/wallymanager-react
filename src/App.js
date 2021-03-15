@@ -3,28 +3,29 @@ import './App.css';
 import AppRouter from './routers/AppRouter'
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { addIncome, addSavings} from './actions/ActionCreators';
+import { addIncome, addSavings, getBalance} from './actions/ActionCreators';
 import moment from 'moment';
 
 function App() {
   const store = configureStore();
   
-  store.dispatch(addIncome({
-    income:1000,
-    cycle: 7,
-    payDay: 0,
-    payMonth: 0,
-    date: moment('04-24-2020').valueOf()
-}));
 
 store.dispatch(addIncome({
-    income:2000,
-    cycle: 7,
-    payDay: 0,
-    payMonth: 0,
-    date: moment('05-24-2020').valueOf()
+    income:'5000',
+    cycle: '30',
+    payDay: '01',
+    payMonth: '3',
+    date: moment('03-01-2021').valueOf()
 }));
 
+store.dispatch(getBalance({
+  bills:"0",
+  income:"50000",
+  
+}))
+
+
+/*
 store.dispatch(addSavings({
     description:'test', 
     amount:1000,
@@ -33,12 +34,12 @@ store.dispatch(addSavings({
 }));
 
 store.dispatch(addSavings({
-  description:'test1', 
+  description:'test1', 1
   amount:2000,
   frequency: 3,
   enable: true
 }));
-
+*/
 
   return (
     <Provider store={store}>

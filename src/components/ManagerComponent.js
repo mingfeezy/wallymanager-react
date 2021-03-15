@@ -27,7 +27,13 @@ function checkCycle(cycle) {
 // }
 
 
-const mapStateTothisProps = state => ({ management: state.management, bills: state.bills, savings: state.savings, income: state.income, profile: state.profile })
+const mapStateTothisProps = ({management, bills, savings, income, profile}) => ({ 
+    management, 
+    bills, 
+    savings, 
+    income, 
+    profile
+})
 
     class Manager extends Component {
      constructor(props) {

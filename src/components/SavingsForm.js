@@ -8,6 +8,7 @@ import { Form, Field } from 'react-final-form'
 class SavingsForm extends Component {
 
     handleSubmit = (values) => {
+
         this.props.onSubmit(values);
     }
 
@@ -37,13 +38,13 @@ class SavingsForm extends Component {
                             <Row className="form-group">
                                 <Label htmlFor="amount" style={{color: "yellowgreen"}} md={2}>Amount</Label>
                                 <Col md={10}>
-                                    <Field name="amount" component="input" placeholder="Amount" />
+                                    <Field name="amount" component="input" placeholder="Amount" parse={(value)=>parseFloat(value)}/>
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="frequency" style={{color: "yellowgreen"}} md={2}>Frequency</Label>
+                                <Label htmlFor="frequency" style={{color: "yellowgreen"}} md={2} >Frequency</Label>
                                 <Col md={10}>
-                                    <Field name="frequency" component="input" placeholder="Frequency" />
+                                    <Field name="frequency" component="input" placeholder="Frequency" parse={(value)=>parseInt(value)}/>
                                 </Col>
                             </Row>
                             <Row className="form-group">

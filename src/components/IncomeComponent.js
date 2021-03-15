@@ -27,12 +27,11 @@ class Income extends Component {
         const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.state.startDate);
         const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(this.state.startDate);
         const date = `${day}-${month}`
-        const data = {income: values.income,cycle: values.cycle, payDay: day, payMonth: month}
-
-        this.props.addIncome(data)
+        const data = {income: parseFloat(values.income), cycle: parseInt(values.cycle), payDay: parseInt(day), payMonth: parseInt(month)}
+        this.props.addIncome(data);
         // this.props.getNextPayDate(data)
         // this.props.history.push("/home");
-        this.setState({
+        this.setState({ 
             nextBtn: false,
             nextBtnColor: 'darkblue'
         })
@@ -62,6 +61,7 @@ class Income extends Component {
                                 <h4>Net income </h4>
                             </Label>
                             <Control.text
+                                type='number'
                                 id="income" 
                                 name="income"
                                 model=".income"
@@ -70,7 +70,7 @@ class Income extends Component {
                                 validators={{
                                     required,
                                     isNumber
-                                }}     
+                                }}
                                 />
                                 <Errors
                                     className="text-danger"
@@ -92,6 +92,7 @@ class Income extends Component {
                                 name="cycle"
                                 model=".cycle"
                                 className="form-control">
+
                                 <option value="7">weekly</option>
                                 <option value="15">Bi weekly</option>
                                 <option value="30">Monthly</option>
