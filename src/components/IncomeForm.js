@@ -22,6 +22,10 @@ class IncomeForm extends Component {
         const year = new Intl.DateTimeFormat('en', { year: '2-digit' }).format(this.state.startDate);
         const date = `${month}-${day}-${year}`;
         const data = {...values, payDay: day, payMonth: month, date:moment(date).valueOf()};
+
+        console.log(values);
+        console.log(data);
+
         this.props.onSubmit(data);
         this.props.history.push("/dashboard");
     }
