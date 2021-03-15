@@ -10,19 +10,19 @@ function App() {
   const store = configureStore();
   
 
-store.dispatch(addIncome({
-    income:'5000',
-    cycle: '30',
-    payDay: '01',
-    payMonth: '3',
-    date: moment('03-01-2021').valueOf()
-}));
+// store.dispatch(addIncome({
+//     income:'5000',
+//     cycle: '30',
+//     payDay: '01',
+//     payMonth: '3',
+//     date: moment('03-01-2021').valueOf()
+// }));
 
-store.dispatch(getBalance({
-  bills:"0",
-  income:"50000",
+// store.dispatch(getBalance({
+//   bills:"0",
+//   income:"50000",
   
-}))
+// }))
 
 
 /*

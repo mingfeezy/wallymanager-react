@@ -16,8 +16,7 @@ class AddSavingsPage extends Component {
 handleSubmit(saving) {
     console.log(saving)
     this.props.addSavings(saving);
-    this.props.getBalance(this.props.bills, this.props.income[0].income, this.props.income[0].cycle, this.props.management.payDay, +saving.amount) 
-    
+    this.props.getBalance(this.props.bills, this.props.income[0].income, this.props.income[0].cycle, this.props.management.payDay, +saving.amount)   
 }
     render() {
         return (

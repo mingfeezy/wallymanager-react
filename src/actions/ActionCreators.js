@@ -20,16 +20,16 @@ export const addProfile = ({
 });
 
 export const addSavings = ({
-    description= '',
     amount = 0,
+    description= '',
     frequency = 0,
     enable = true
 } = {}) => ({
     type: ActionTypes.ADD_SAVINGS,
     payload: {
         id:uuidv4(),
-        description, 
         amount,
+        description, 
         frequency,
         enable
     }
@@ -100,14 +100,14 @@ export const addIncome = ({
 })
 export function getNextPayDate (income, cycle, payDay, payMonth) {
     
-    if (+payDay + +cycle >= 30) {
+    if (payDay + cycle >= 30) {
         return (
             {
                 type: ActionTypes.ADD_NEXT_PAY_DATE,
                 payload: {
-                    payMonth:+payMonth,
-                    payDay:+payDay + +cycle,
-                    income: +income,
+                    payMonth:payMonth,
+                    payDay:payDay + cycle,
+                    income: income,
                     cycle: cycle
                 }
             }
@@ -116,17 +116,17 @@ export function getNextPayDate (income, cycle, payDay, payMonth) {
         {
             type: ActionTypes.ADD_NEXT_PAY_DATE,
             payload: {
-                payMonth:+payMonth + 1,
-                payDay:+payDay + +cycle,
-                income: +income,
-                cycle: +cycle
+                payMonth:payMonth + 1,
+                payDay:payDay + cycle,
+                income: income,
+                cycle: cycle
             }
         }
     )
 }
 function checkCycle(cycle) {
 
-    switch (+cycle) {
+    switch (cycle) {
         case 7:
             return 'Weekly';
         case 15:
@@ -137,8 +137,6 @@ function checkCycle(cycle) {
 }
 function checkBillsCycle(incomecycle, carCycle, rentCycle, wirelesscycle, car, rent, wireless) {
     console.log(incomecycle)
-  
-    // let bills = {amountCar: car, amountRent: rent, amountWireless: wireless}
     let bills = {amountCar: car, amountRent: rent, amountWireless: wireless}
     switch (incomecycle) {
         case incomecycle < carCycle:
@@ -155,26 +153,9 @@ function checkBillsCycle(incomecycle, carCycle, rentCycle, wirelesscycle, car, r
     
 }
 export function getBalance(bills, income, cycle, payDay, savings) {
-    console.log(income)
-    console.log(savings)
-    let allBills = checkBillsCycle(cycle, +bills.bills.dayCar, +bills.bills.dayRent, +bills.bills.dayWireless, bills.bills.car, bills.bills.rent, bills.bills.wireless)
-    console.log(allBills)
-    // console.log(savings)
-    // console.log(income)
-    // console.log(payDay)
-    // console.log(bills.bills.rent)
-    // console.log(bills.bills.car)
-    // console.log(bills.bills.wireless)
-    // console.log(bills.bills.insurances)
-    let totalBill = parseFloat(bills.bills.rent) + parseFloat(bills.bills.car) + parseFloat(bills.bills.insurances) + parseFloat(bills.bills.wireless);
-    let totalDeduction = parseFloat(totalBill) + parseFloat(savings)
-    console.log(totalBill)
-    console.log(totalDeduction)
-    console.log(income)
+    let totalBill = bills.bills.rent + bills.bills.car + bills.bills.insurances + bills.bills.wireless;
+    let totalDeduction = totalBill + savings
     if (bills.bills.dayCar < payDay && bills.bills.dayRent < payDay && bills.bills.dayWireless < payDay && savings) {
-        
-        console.log(parseFloat(totalBill))
-        console.log(parseFloat(income) - parseFloat(totalDeduction))
         return ({
             type: ActionTypes.GET_BALANCE,
             payload: {balance: income - totalDeduction, cycle: checkCycle(cycle), totalBill: totalBill, totalDeduction: totalDeduction}
@@ -182,7 +163,17 @@ export function getBalance(bills, income, cycle, payDay, savings) {
         } else if (!savings) {
             return ({
                 type: ActionTypes.GET_BALANCE,
-            payload: {balance: income - totalBill, cycle: checkCycle(cycle), totalBill: totalBill, totalDeduction: totalDeduction}
+                payload: {balance: income - totalBill, cycle: checkCycle(cycle), totalBill: totalBill, totalDeduction: totalDeduction}
+            })
+        } else if (!bills && savings) {
+            return ({
+                type: ActionTypes.GET_BALANCE,
+                payload: {balance: income - savings, cycle: checkCycle(cycle), totalBill: 0, totalDeduction: savings}
+            })
+        } else if (!bills && !savings) {
+            return ({
+                type: ActionTypes.GET_BALANCE,
+                payload: {balance: income , cycle: checkCycle(cycle), totalBill: 0, totalDeduction: 0}
             })
         }
 }

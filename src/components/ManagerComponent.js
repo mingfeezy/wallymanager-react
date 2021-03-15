@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { Table } from 'reactstrap';
-import { getNextPayDate } from '../actions/ActionCreators'
-import { getBalance }from '../actions/ActionCreators'
+import Dashboard from './DashboardComponent'
+import IncomeList from './IncomeList';
+import SavingsList from './SavingsList';
+import IncomeListFilters from './IncomeListFilters';
+import { Link } from 'react-router-dom';
 
 // PLEASE DO NOT DELETE THIS!!
 
@@ -81,39 +83,45 @@ const mapStateTothisProps = ({management, bills, savings, income, profile}) => (
     render() {
         
             return (
+                <Fragment>
                 <div className="container mt-5">
-                    <div className="row mb-5">
-                        <button className="editBtn col-2 text-white"><i class="fa fa-edit my-auto" /> Profile</button>
-                        <button className="editBtn col-2 text-white" ><i class="fa fa-edit my-auto" />  Income</button>
-                        <button className="editBtn col-2 text-white"><i class="fa fa-edit my-auto" />  Bills</button>
-                        <button className="editBtn col-2 text-white"><i class="fa fa-edit my-auto" />  Savings</button>
-                    </div>
+          
+                
+                <div className="row mt-3">
+                    <h3 className="col-4 offset-4" style={{fontSize: "85px", color: "yellowgreen"}}>{this.props.management.balance.balance}$</h3>
+                </div>
+                <div className="row" style={{marginTop: "-10px"}}>
+                    <p className="col-2 offset-5" style={{fontSize: "12px", color: "red"}}>Next balance: {this.props.management.payMonth}-{this.props.management.payDay}</p>
                     
-                    <div className="row mt-3">
-                        <h3 className="col-4 offset-4" style={{fontSize: "85px", color: "yellowgreen"}}>{this.props.management.balance.balance}$</h3>
+                </div>
+                <div className="row mt-5">
+                    <div className="col-3 custom-amount-box mx-auto" align="center">
+                        <h4>Income</h4>
+                        <p style={{fontSize: "44px", color: "fuchsia"}}>{this.props.income[0].income}$</p>
+                        <p className="offset-4" style={{fontSize: "15px", color: "tan", marginTop: "-25px", fontWeight: "bold"}}>{checkCycle(this.props.income[0].cycle)}</p>
+                        <p className="offset-4" style={{fontSize: "15px", color: "tan", marginTop: "-20px"}}>Before {this.props.management.payMonth}-{this.props.management.payDay}</p>
                     </div>
-                    <div className="row" style={{marginTop: "-10px"}}>
-                        <p className="col-2 offset-5" style={{fontSize: "12px", color: "red"}}>Next balance: {this.props.management.payMonth}-{this.props.management.payDay}</p>
+                    <div className="col-3 custom-amount-box  mx-auto" align="center">
+                        <h4>Bills</h4>
+                        <p style={{fontSize: "44px", color: "darkorange"}}>{this.props.management.balance.totalBill}$</p>
+                    </div>
+                    <div className="col-3 custom-amount-box  mx-auto" align="center">
+                        
+                        <h4>Savings</h4>
+                        <p style={{fontSize: "44px", color: "yellowgreen"}}>{+this.props.savings[0].amount ? +this.props.savings[0].amount: 0 }$</p>
+                        
                         
                     </div>
-                    <div className="row mt-5">
-                        <div className="col-3 custom-amount-box mx-auto" align="center">
-                            <h4>Income</h4>
-                            <p style={{fontSize: "44px", color: "fuchsia"}}>{this.props.income[0].income}$</p>
-                            <p className="offset-4" style={{fontSize: "15px", color: "tan", marginTop: "-25px", fontWeight: "bold"}}>{checkCycle(this.props.income[0].cycle)}</p>
-                            <p className="offset-4" style={{fontSize: "15px", color: "tan", marginTop: "-20px"}}>Before {this.props.management.payMonth}-{this.props.management.payDay}</p>
-                        </div>
-                        <div className="col-3 custom-amount-box  mx-auto" align="center">
-                            <h4>Bills</h4>
-                            <p style={{fontSize: "44px", color: "darkorange"}}>{this.props.management.balance.totalBill}$</p>
-                        </div>
-                        <div className="col-3 custom-amount-box  mx-auto" align="center">
-                            <h4>Savings</h4>
-                            <p style={{fontSize: "44px", color: "yellowgreen"}}>{+this.props.savings[0].amount ? +this.props.savings[0].amount: 0 }$</p>
-                        </div>
-                    </div>
-
                 </div>
+
+            </div>
+            <div>
+                <IncomeListFilters/>
+                <IncomeList/>
+                <SavingsList/>
+            </div>
+            </Fragment>
+                
             )
 
         

@@ -11,8 +11,9 @@ const UpdateIncomePage = (props) => (
         <IncomeForm 
             incomeItem={props.incomeItem}
             onSubmit={(incomeItem)=>{
+                console.log(incomeItem)
                 props.dispatch(updateIncome(props.incomeItem.id, incomeItem));
-                props.dispatch(getBalance(props.bills, props.income[0].income, props.income[0].cycle, props.management.payDay, props.savings[0].amount))
+                props.dispatch(getBalance(props.bills, incomeItem.income, props.income[0].cycle, props.management.payDay, props.savings[0].amount))
                 props.history.push('/dashboard');
         }}/>
     </div>

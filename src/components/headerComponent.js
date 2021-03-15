@@ -45,14 +45,10 @@ class Header extends Component {
                                     <i className="fa fa-list fa-lg" /> Profile 
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink className="nav-link text-white" to="/dashboard">
-                                    <i className="fa fa-list fa-lg" /> Dashboard 
-                                </NavLink>
-                            </NavItem>
+                       
                             <NavItem>
                                 <NavLink className="nav-link text-white" to="/manager">
-                                    <i className="fa fa-list fa-lg" /> Manager //
+                                    <i className="fa fa-list fa-lg" /> Dashboard //
                                 </NavLink>
                             </NavItem>
                  

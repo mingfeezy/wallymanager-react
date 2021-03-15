@@ -63,6 +63,7 @@ const IncomeList = (props) => {
         <div>
             {props.income && props.income.map((incomeItem)=>{
                     return <IncomeListItem key={incomeItem.id} {...incomeItem}
+                        
                      onClick={(id)=> {
                             props.deleteIncome({id});
                         }
@@ -75,9 +76,10 @@ const IncomeList = (props) => {
     ); 
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         income: selectIncome(state.income, state.filters),
+    
         //filters: state.filters
     }
 }

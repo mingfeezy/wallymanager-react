@@ -1,6 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
+function checkCycle(cycle) {
+    switch (cycle) {
+        case 7:
+            return 'Weekly';
+        case 15:
+            return 'Bi weekly'
+        default:
+            return 'Monthly'
+    }
+}
+const mapStateTothisProps = (management) => ({ 
+    management
+ 
+})
 const IncomeListItem = ({id, income, cycle, payDay, payMonth, date, onClick}) => {
     return (
         <div className='container' style={{color: "black"}}>
@@ -9,7 +25,7 @@ const IncomeListItem = ({id, income, cycle, payDay, payMonth, date, onClick}) =>
                     <div>{income}</div>
                 </div>
                 <div className='col-2 p-1'>
-                    <div>{cycle}</div>
+                    <div>{checkCycle(cycle)}</div>
                 </div>
                 <div className='col-2 p-1'>
                     <div>{payDay}</div>
@@ -33,4 +49,4 @@ const IncomeListItem = ({id, income, cycle, payDay, payMonth, date, onClick}) =>
     );
 }
 
-export default IncomeListItem;
+export default withRouter(connect(mapStateTothisProps)(IncomeListItem));
