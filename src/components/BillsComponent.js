@@ -129,10 +129,11 @@ const isNumber = val => !isNaN(+val);
                                                 name="car"
                                                 model=".car"
                                                 className="form-control"
-                                                placeholder="0.00$" 
+                                                placeholder="$0.00" 
                                                 validators={{
                                                     isNumber
                                                 }}
+                                                type="number"
                                                 parser={value=>parseFloat(value)}
                                             />
                                             <Errors
@@ -179,7 +180,8 @@ const isNumber = val => !isNaN(+val);
                                             validators={{
                                                 isNumber
                                             }} 
-                                            parser={value=>parseFloat(value)}    
+                                            type="number"
+                                            parser={value=>parseFloat(value)}  
                                         />
                                         <Errors
                                             className="text-danger"
@@ -225,8 +227,8 @@ const isNumber = val => !isNaN(+val);
                                             validators={{
                                                 isNumber
                                             }}  
-                                            parser={value=>parseFloat(value)}
-
+                                            type="number"
+                                            parser={value=>parseFloat(value)}  
                                         />
                                         <Errors
                                             className="text-danger"
@@ -272,8 +274,8 @@ const isNumber = val => !isNaN(+val);
                                         validators={{
                                             isNumber
                                         }}     
-                                        parser={value=>parseFloat(value)}
-
+                                        type="number"
+                                        parser={value=>parseFloat(value)}  
                                     />
                                     <Errors
                                         className="text-danger"
