@@ -38,13 +38,19 @@ class SavingsForm extends Component {
                             <Row className="form-group">
                                 <Label htmlFor="amount" style={{color: "yellowgreen"}} md={2}>Amount</Label>
                                 <Col md={10}>
-                                    <Field name="amount" component="input" placeholder="Amount" parse={(value)=>parseFloat(value)}/>
+                                    <Field name="amount" component="input" placeholder="Amount" parse={(value)=>{
+                                        if(!value)
+                                            return value;
+                                        return parseFloat(value)}}/>
                                 </Col>
                             </Row>
                             <Row className="form-group">
                                 <Label htmlFor="frequency" style={{color: "yellowgreen"}} md={2} >Frequency</Label>
                                 <Col md={10}>
-                                    <Field name="frequency" component="input" placeholder="Frequency" parse={(value)=>parseInt(value)}/>
+                                    <Field name="frequency" component="input" placeholder="Frequency" parse={(value)=> {
+                                        if(!value)
+                                            return value;
+                                        return parseInt(value)}}/>
                                 </Col>
                             </Row>
                             <Row className="form-group">
