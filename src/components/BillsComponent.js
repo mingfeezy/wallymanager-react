@@ -37,7 +37,6 @@ const isNumber = val => !isNaN(+val);
              billsValues: [],
              billsDates: [],
              nextBtn: true,
-             nextBtn: true,
             nextBtnColor: 'black'
          }
          this.revealInput = this.revealInput.bind(this);
@@ -133,7 +132,8 @@ const isNumber = val => !isNaN(+val);
                                                 placeholder="0.00$" 
                                                 validators={{
                                                     isNumber
-                                                }}     
+                                                }}
+                                                parser={value=>parseFloat(value)}
                                             />
                                             <Errors
                                                 className="text-danger"
@@ -178,7 +178,8 @@ const isNumber = val => !isNaN(+val);
                                             placeholder="0.00$" 
                                             validators={{
                                                 isNumber
-                                            }}     
+                                            }} 
+                                            parser={value=>parseFloat(value)}    
                                         />
                                         <Errors
                                             className="text-danger"
@@ -223,7 +224,9 @@ const isNumber = val => !isNaN(+val);
                                             placeholder="0.00$" 
                                             validators={{
                                                 isNumber
-                                            }}     
+                                            }}  
+                                            parser={value=>parseFloat(value)}
+
                                         />
                                         <Errors
                                             className="text-danger"
@@ -269,6 +272,8 @@ const isNumber = val => !isNaN(+val);
                                         validators={{
                                             isNumber
                                         }}     
+                                        parser={value=>parseFloat(value)}
+
                                     />
                                     <Errors
                                         className="text-danger"
